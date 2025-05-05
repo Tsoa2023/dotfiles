@@ -82,8 +82,21 @@ end
 map('v', '<A-j>', ':lua MoveSelectionDown()<CR>', { noremap = true, silent = true })
 map('v', '<A-k>', ':lua MoveSelectionUp()<CR>', { noremap = true, silent = true })
 
-map("n", "<C-a>j", "<cmd>NvimTreeToggle<CR>", { noremap = true, silent = true, desc = "Toggle NvimTree" })
+map("n", "<C-j>", "<cmd>NvimTreeToggle<CR>", { noremap = true, silent = true, desc = "Toggle NvimTree" })
 map("n", "<C-n>", "<cmd>VMLive<CR>", { desc = "Visual Multi: VMLive" })
 
 map("n", "<A-u>", "<cmd>UndotreeToggle<CR>", { desc = "Toggle Undotree" })
-map("n", "<leader>q", ":bd<CR>", { silent = true, desc = "buffer delete" })
+map("n", "<leader>q", ":bufdo bd<CR>", { silent = true, desc = "buffer delete" })
+
+map({ "n", "t" }, "<A-i>", function()
+	require("nvchad.term").toggle {
+		pos = "float",
+		id = "floatTerm",
+		float_opts = {
+			row = 0.35,
+			col = 5.95,
+			width = 0.65,
+			height = 1.0,
+		},
+	}
+end, { desc = "terminaltoggle floating term" })

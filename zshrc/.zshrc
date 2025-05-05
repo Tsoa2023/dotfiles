@@ -81,6 +81,7 @@ plugins=(
     git
     zsh-autosuggestions
     zsh-syntax-highlighting
+	zsh-history-substring-search
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -136,14 +137,15 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 export PATH=$PATH:$JAVA_HOME/bin
 export PATH="$HOME/.gem/ruby/$(ruby -e 'print RUBY_VERSION')/bin:$PATH"
+export _ZO_DATA_DIR="$HOME/.local/share/zoxide"
 
 alias clip='xclip -selection clipboard'
 alias pclip='pwd | clip'
 alias maked='make re;make clean;clear'
 alias nvim='/home/fharifen/appimage/nvim.appimage'
-alias cdz='z'
+# alias gcc='z'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 eval "$(oh-my-posh init zsh --config $POSH_THEMES_PATH/M365Princess.omp.json)"
-eval "$(zoxide init zsh)"  # Remplacez `zsh` par `bash` si vous utilisez Bash
+eval "$(zoxide init zsh --cmd cd)"
