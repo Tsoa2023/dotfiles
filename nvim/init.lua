@@ -39,3 +39,6 @@ require "nvchad.autocmds"
 vim.schedule(function()
   require "mappings"
 end)
+
+vim.opt.conceallevel = 2
+vim.opt.concealcursor = "nc"

@@ -41,6 +41,18 @@ return {
   { "nvzone/volt", lazy = true },
   { "nvzone/menu", lazy = true },
 
+
+	{
+	  "rcarriga/nvim-notify",
+	  config = function()
+		require("notify").setup({
+		  timeout = 100,               -- plus rapide (en ms)
+		  top_down = false,           -- bas de l'écran
+		  render = "default",         -- ou "minimal" pour un style épuré
+		})
+		vim.notify = require("notify")
+	  end,
+	},
   -- lazy.nvim
   {
     "folke/noice.nvim",
