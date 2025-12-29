@@ -29,15 +29,9 @@ require("lazy").setup({
 dofile(vim.g.base46_cache .. "defaults")
 dofile(vim.g.base46_cache .. "statusline")
 
--- Setup notify après le chargement des plugins
-vim.schedule(function()
-  local ok, notify = pcall(require, "notify")
-  if ok then
-    notify.setup({
-      background_colour = "#000000",
-    })
-  end
-end)
+require("notify").setup({
+  background_colour = "#000000",
+})
 
 require "options"
 require "nvchad.autocmds"

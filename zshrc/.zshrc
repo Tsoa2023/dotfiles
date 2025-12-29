@@ -138,14 +138,42 @@ export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 export PATH=$PATH:$JAVA_HOME/bin
 export PATH="$HOME/.gem/ruby/$(ruby -e 'print RUBY_VERSION')/bin:$PATH"
 export _ZO_DATA_DIR="$HOME/.local/share/zoxide"
+export EDITOR='/home/fharifen/appimage/nvim.appimage'
 
 alias clip='xclip -selection clipboard'
 alias pclip='pwd | clip'
 alias maked='make re;make clean;clear'
 alias nvim='/home/fharifen/appimage/nvim.appimage'
+alias nvimf='nvim $(\fzf --style full)'
+alias fzf="fzf --style full --preview 'fzf-preview.sh {}' --bind 'focus:transform-header:file --brief {}'"
+alias zshrc='source ~/.zshrc'
 # alias gcc='z'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 eval "$(oh-my-posh init zsh --config $POSH_THEMES_PATH/M365Princess.omp.json)"
 eval "$(zoxide init zsh --cmd cd)"
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+ 
+export PATH=/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/home/fharifen/.gem/ruby/3.0.2/bin:/home/fharifen/.local/bin:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/home/fharifen/.gem/ruby/3.0.2/bin:/home/fharifen/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/fharifen/appimage/:/home/fharifen/development/flutter/bin:/home/fharifen/Android/Sdk/cmdline-tools/latest/bin:/home/fharifen/Android/Sdk/platform-tools:/usr/lib/jvm/java-17-openjdk-amd64/bin:/home/fharifen/appimage/:/home/fharifen/development/flutter/bin:/home/fharifen/Android/Sdk/cmdline-tools/latest/bin:/home/fharifen/Android/Sdk/platform-tools:/usr/lib/jvm/java-17-openjdk-amd64/bin:/home/fharifen/.local/bin
+
+function cdd {
+    local IFS=$'	
+'
+    local tempfile="$(mktemp -t tmp.XXXXXX)"
+    local ranger_cmd=(
+        command
+        ranger
+        --cmd="map q chain shell echo %d > \"$tempfile\"; quitall"
+    )
+    
+    ${ranger_cmd[@]} "$@"
+    if [[ -f "$tempfile" ]] && [[ "$(cat -- "$tempfile")" != "$(echo -n $(pwd))" ]]; then
+        cd -- "$(cat "$tempfile")" || return
+    fi
+    command rm -f -- "$tempfile" 2>/dev/null
+}
+
+alias lss='ls -lia --group-directories-first --color=auto'
+export PATH=/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/home/fharifen/.gem/ruby/3.0.2/bin:/home/fharifen/.local/bin:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/home/fharifen/.gem/ruby/3.0.2/bin:/home/fharifen/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/fharifen/appimage/:/home/fharifen/development/flutter/bin:/home/fharifen/Android/Sdk/cmdline-tools/latest/bin:/home/fharifen/Android/Sdk/platform-tools:/usr/lib/jvm/java-17-openjdk-amd64/bin:/home/fharifen/appimage/:/home/fharifen/development/flutter/bin:/home/fharifen/Android/Sdk/cmdline-tools/latest/bin:/home/fharifen/Android/Sdk/platform-tools:/usr/lib/jvm/java-17-openjdk-amd64/bin:/home/fharifen/.local/bin:/home/fharifen/.local/bin

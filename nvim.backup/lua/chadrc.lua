@@ -9,48 +9,11 @@ local M = {
     integrations = {},
     transparency = true,
     hl_override = {
-      -- Cyberpunk Neon Dashboard
-      NvDashAscii = { fg = "#00f0ff", bold = true },
-      NvDashButtons = { fg = "#ff2e97" },
-
-      -- Statusline Cyberpunk Neon Futuristic
-      StatusLine = { bg = "NONE" },
-      St_file = { fg = "#00f0ff", bg = "#1a1a2e", bold = true },
-      St_file_sep = { fg = "#1a1a2e", bg = "NONE" },
-      St_gitIcons = { fg = "#ff2e97", bg = "#1a1a2e" },
-      St_Lsp = { fg = "#39ff14", bg = "#1a1a2e" },
-      St_LspMsg = { fg = "#bd00ff", bg = "#1a1a2e" },
-      St_EmptySpace = { fg = "#1a1a2e", bg = "NONE" },
-      St_EmptySpace2 = { fg = "#1a1a2e", bg = "NONE" },
-      St_pos_sep = { fg = "#1a1a2e", bg = "NONE" },
-      St_pos_icon = { fg = "#0d0d0d", bg = "#00f0ff", bold = true },
-      St_pos_text = { fg = "#00f0ff", bg = "#1a1a2e", bold = true },
-      St_cwd = { fg = "#bd00ff", bg = "#1a1a2e", bold = true },
-      St_cwd_sep = { fg = "#1a1a2e", bg = "NONE" },
-      St_cwd_icon = { fg = "#0d0d0d", bg = "#bd00ff" },
-
-      -- Couleurs Neon Futuristic pour les modes
-      St_NormalMode = { fg = "#0d0d0d", bg = "#00f0ff", bold = true },
-      St_InsertMode = { fg = "#0d0d0d", bg = "#39ff14", bold = true },
-      St_VisualMode = { fg = "#0d0d0d", bg = "#ff2e97", bold = true },
-      St_ReplaceMode = { fg = "#0d0d0d", bg = "#ff6600", bold = true },
-      St_TerminalMode = { fg = "#0d0d0d", bg = "#bd00ff", bold = true },
-      St_CommandMode = { fg = "#0d0d0d", bg = "#ffff00", bold = true },
-      St_ConfirmMode = { fg = "#0d0d0d", bg = "#00aaff", bold = true },
-      St_SelectMode = { fg = "#0d0d0d", bg = "#ff00ff", bold = true },
-      St_NterminalMode = { fg = "#0d0d0d", bg = "#bd00ff", bold = true },
-      St_NormalModeSep = { fg = "#00f0ff", bg = "#1a1a2e" },
-      St_InsertModeSep = { fg = "#39ff14", bg = "#1a1a2e" },
-      St_VisualModeSep = { fg = "#ff2e97", bg = "#1a1a2e" },
-      St_ReplaceModeSep = { fg = "#ff6600", bg = "#1a1a2e" },
-      St_TerminalModeSep = { fg = "#bd00ff", bg = "#1a1a2e" },
-      St_CommandModeSep = { fg = "#ffff00", bg = "#1a1a2e" },
-      St_ConfirmModeSep = { fg = "#00aaff", bg = "#1a1a2e" },
-      St_SelectModeSep = { fg = "#ff00ff", bg = "#1a1a2e" },
-      St_NterminalModeSep = { fg = "#bd00ff", bg = "#1a1a2e" },
+      NvDashAscii = { fg = "green" },
+      NvDashButtons = { fg = "blue" },
     },
     hl_add = {
-      NvDashLazy = { fg = "#bd00ff" },
+       NvDashLazy = { fg = "red" },
     },
     theme_toggle = { "monekai", "one_light" },
   },
@@ -59,14 +22,14 @@ local M = {
     cmp = {
       icons_left = true, -- only for non-atom styles!
       lspkind_text = true,
-      style = "atom_colored", -- default/flat_light/flat_dark/atom/atom_colored
+      style = "default", -- default/flat_light/flat_dark/atom/atom_colored
       format_colors = {
         tailwind = true, -- will work for css lsp too
         icon = "󱓻",
       },
     },
 
-    telescope = { style = "bordered" }, -- borderless / bordered
+    telescope = { style = "borderless" }, -- borderless / bordered
 
     statusline = {
       enabled = true,
@@ -78,9 +41,12 @@ local M = {
       modules = nil,
     },
 
-    -- Désactiver la tabufline NvChad pour utiliser bufferline.nvim
+    -- lazyload it when there are 1+ buffers
     tabufline = {
-      enabled = false,
+      enabled = true,
+      lazyload = true,
+      order = { "treeOffset", "buffers", "tabs", "btns" },
+      modules = nil,
     },
   },
 

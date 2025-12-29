@@ -9,21 +9,6 @@ map("i", "jk", "<ESC>")
 -- Save in normal, insert, and visual modes
 map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 
--- Bufferline navigation
-map("n", "<Tab>", "<cmd>BufferLineCycleNext<CR>", { desc = "Buffer suivant" })
-map("n", "<S-Tab>", "<cmd>BufferLineCyclePrev<CR>", { desc = "Buffer précédent" })
-map("n", "<leader>x", "<cmd>bdelete<CR>", { desc = "Fermer le buffer" })
-map("n", "<leader>bp", "<cmd>BufferLineTogglePin<CR>", { desc = "Pin/Unpin buffer" })
-map("n", "<leader>bP", "<cmd>BufferLineGroupClose ungrouped<CR>", { desc = "Fermer les buffers non-pinnés" })
-map("n", "<leader>bo", "<cmd>BufferLineCloseOthers<CR>", { desc = "Fermer les autres buffers" })
-map("n", "<leader>bl", "<cmd>BufferLineCloseRight<CR>", { desc = "Fermer les buffers à droite" })
-map("n", "<leader>bh", "<cmd>BufferLineCloseLeft<CR>", { desc = "Fermer les buffers à gauche" })
-map("n", "<leader>1", "<cmd>BufferLineGoToBuffer 1<CR>", { desc = "Aller au buffer 1" })
-map("n", "<leader>2", "<cmd>BufferLineGoToBuffer 2<CR>", { desc = "Aller au buffer 2" })
-map("n", "<leader>3", "<cmd>BufferLineGoToBuffer 3<CR>", { desc = "Aller au buffer 3" })
-map("n", "<leader>4", "<cmd>BufferLineGoToBuffer 4<CR>", { desc = "Aller au buffer 4" })
-map("n", "<leader>5", "<cmd>BufferLineGoToBuffer 5<CR>", { desc = "Aller au buffer 5" })
-
 -- Add mappings for 'menu' plugin
 
 -- Redimensionner les fenêtres
