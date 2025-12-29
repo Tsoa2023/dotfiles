@@ -49,6 +49,19 @@ map("n", "<C-t>", function()
   require("menu").open("default")
 end, { desc = "Open default menu" })
 
+-- ╔═══════════════════════════════════════════════════════════════╗
+-- ║              GITHUB COPILOT KEYMAPS                          ║
+-- ╚═══════════════════════════════════════════════════════════════╝
+map("n", "<leader>cp", "<cmd>Copilot panel<CR>", { desc = "Toggle Copilot Panel" })
+map("n", "<leader>ce", "<cmd>Copilot enable<CR>", { desc = "Enable Copilot" })
+map("n", "<leader>cd", "<cmd>Copilot disable<CR>", { desc = "Disable Copilot" })
+
+-- Suggestion navigation and acceptance (configured in copilot.lua)
+-- <M-l> - Accept suggestion
+-- <M-]> - Next suggestion
+-- <M-[> - Previous suggestion
+-- <C-]> - Dismiss suggestion
+
 -- Mouse users + NvimTree users - opens contextual menu with right-click
 map("n", "<RightMouse>", function()
   vim.cmd.exec '"normal! \\<RightMouse>"'

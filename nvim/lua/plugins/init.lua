@@ -30,6 +30,21 @@ return {
     opts = require "configs.conform",
   },
 
+  -- ╔═══════════════════════════════════════════════════════════════╗
+  -- ║         GITHUB COPILOT - AI Code Completion                 ║
+  -- ╚═══════════════════════════════════════════════════════════════╝
+  {
+    "github/copilot.vim",
+    event = "InsertEnter",
+    config = function()
+      -- Keymaps personnalisés pour Copilot
+      vim.g.copilot_no_tab_map = true  -- Désactiver Tab par défaut pour éviter conflit
+      vim.keymap.set("i", "<M-l>", 'copilot#Accept("<CR>")', { expr = true, replace_keycodes = false, desc = "Copilot Accept" })
+      vim.keymap.set("i", "<M-]>", "<Plug>(copilot-next)", { desc = "Copilot Next" })
+      vim.keymap.set("i", "<M-[>", "<Plug>(copilot-previous)", { desc = "Copilot Previous" })
+      vim.keymap.set("i", "<C-]>", "<Plug>(copilot-dismiss)", { desc = "Copilot Dismiss" })
+    end,
+  },
 
   -- ╔═══════════════════════════════════════════════════════════════╗
   -- ║           BARBAR.NVIM - CYBERPUNK NEON TABLINE               ║
