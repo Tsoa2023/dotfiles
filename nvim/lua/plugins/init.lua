@@ -30,11 +30,20 @@ return {
     opts = require "configs.conform",
   },
 
-  -- Bufferline Cyberpunk Neon
+
+  -- ╔═══════════════════════════════════════════════════════════════╗
+  -- ║           BARBAR.NVIM - CYBERPUNK NEON TABLINE               ║
+  -- ║         Better UI with proper rounded separators             ║
+  -- ╚═══════════════════════════════════════════════════════════════╝
   {
-    "akinsho/bufferline.nvim",
-    version = "*",
-    dependencies = "nvim-tree/nvim-web-devicons",
+    "romgrk/barbar.nvim",
+    dependencies = {
+      "lewis6991/gitsigns.nvim",
+      "nvim-tree/nvim-web-devicons",
+    },
+    init = function()
+      vim.g.barbar_auto_setup = false
+    end,
     event = "BufReadPre",
     config = function()
       -- Couleurs Cyberpunk Neon Futuristic
@@ -44,265 +53,168 @@ return {
       local neon_green = "#39ff14"
       local neon_yellow = "#ffff00"
       local neon_orange = "#ff6600"
-      local neon_blue = "#00aaff"
-      local dark_bg = "NONE"  -- Transparent!
-      local pill_bg = "NONE" -- Fond des pilules
-      local dim = "NONE"  -- Couleur atténuée pour le texte non sélectionné
+      local dark_bg = "#0d0d1a"
+      local pill_bg = "#1a1a2e"
+      local dim = "#4a4a6a"
 
-      require("bufferline").setup({
-        options = {
-          mode = "buffers",
-          themable = true,
-          numbers = "none",
-          close_command = "bdelete! %d",
-          right_mouse_command = "bdelete! %d",
-          left_mouse_command = "buffer %d",
-          middle_mouse_command = nil,
-          indicator = {
-            icon = "",
-            style = "icon",
+      require("barbar").setup({
+        animation = true,
+        auto_hide = false,
+        tabpages = true,
+        clickable = true,
+        focus_on_close = "left",
+        
+        icons = {
+          buffer_index = false,
+          buffer_number = false,
+          button = "󰅙",
+          
+          diagnostics = {
+            [vim.diagnostic.severity.ERROR] = { enabled = true, icon = " " },
+            [vim.diagnostic.severity.WARN] = { enabled = true, icon = " " },
+            [vim.diagnostic.severity.INFO] = { enabled = true, icon = " " },
+            [vim.diagnostic.severity.HINT] = { enabled = true, icon = "󰌵 " },
           },
-          buffer_close_icon = "󰅙",
-          modified_icon = "●",
-          close_icon = "󰅙",
-          left_trunc_marker = "",
-          right_trunc_marker = "",
-          max_name_length = 18,
-          max_prefix_length = 15,
-          truncate_names = true,
-          tab_size = 18,
-          diagnostics = "nvim_lsp",
-          diagnostics_update_in_insert = false,
-          diagnostics_indicator = function(count, level)
-            local icon = level:match("error") and "" or ""
-            return " " .. icon .. count
-          end,
-          offsets = {
-            {
-              filetype = "NvimTree",
-              text = "  EXPLORER ",
-              text_align = "center",
-              separator = true,
-              highlight = "Directory",
-            },
+          
+          gitsigns = {
+            added = { enabled = true, icon = "+" },
+            changed = { enabled = true, icon = "~" },
+            deleted = { enabled = true, icon = "-" },
           },
-          color_icons = true,
-          show_buffer_icons = true,
-          show_buffer_close_icons = true,
-          show_close_icon = false,
-          show_tab_indicators = true,
-          show_duplicate_prefix = true,
-          persist_buffer_sort = true,
-          separator_style = "thick", -- Style arrondi/slant!
-          enforce_regular_tabs = false,
-          always_show_bufferline = true,
-          hover = {
+          
+          modified = { button = "●" },
+          pinned = { button = "󰐃", filename = true },
+          
+          -- Séparateurs Powerline arrondis (Nerd Font Powerline Extra)
+          separator = { left = "", right = "" },
+          separator_at_end = true,
+          
+          inactive = { separator = { left = "", right = "" } },
+          current = { buffer_index = false },
+          visible = { modified = { buffer_number = false } },
+          
+          filetype = {
+            custom_colors = false,
             enabled = true,
-            delay = 200,
-            reveal = { "close" },
           },
         },
-        highlights = {
-          -- Fond transparent
-          fill = {
-            fg = dim,
-            bg = dark_bg,
-          },
-          -- Buffers non sélectionnés
-          background = {
-            fg = dim,
-            bg = pill_bg,
-          },
-          buffer_visible = {
-            fg = neon_purple,
-            bg = pill_bg,
-          },
-          -- Buffer sélectionné - Style pilule neon
-          buffer_selected = {
-            fg = neon_cyan,
-            bg = pill_bg,
-            bold = true,
-            italic = false,
-          },
-          -- Boutons fermer
-          close_button = {
-            fg = dim,
-            bg = pill_bg,
-          },
-          close_button_visible = {
-            fg = neon_purple,
-            bg = pill_bg,
-          },
-          close_button_selected = {
-            fg = neon_pink,
-            bg = pill_bg,
-          },
-          -- Indicateur modifié
-          modified = {
-            fg = neon_orange,
-            bg = pill_bg,
-          },
-          modified_visible = {
-            fg = neon_orange,
-            bg = pill_bg,
-          },
-          modified_selected = {
-            fg = neon_green,
-            bg = pill_bg,
-          },
-          -- Séparateurs slant - IMPORTANT pour le style arrondi
-          separator = {
-            fg = pill_bg,
-            bg = dark_bg,
-          },
-          separator_visible = {
-            fg = pill_bg,
-            bg = dark_bg,
-          },
-          separator_selected = {
-            fg = pill_bg,
-            bg = dark_bg,
-          },
-          -- Indicateur
-          indicator_selected = {
-            fg = neon_cyan,
-            bg = pill_bg,
-          },
-          indicator_visible = {
-            fg = neon_purple,
-            bg = pill_bg,
-          },
-          -- Tabs
-          tab = {
-            fg = dim,
-            bg = pill_bg,
-          },
-          tab_selected = {
-            fg = "#0d0d0d",
-            bg = neon_cyan,
-            bold = true,
-          },
-          tab_separator = {
-            fg = pill_bg,
-            bg = dark_bg,
-          },
-          tab_separator_selected = {
-            fg = neon_cyan,
-            bg = dark_bg,
-          },
-          tab_close = {
-            fg = neon_pink,
-            bg = pill_bg,
-          },
-          -- Duplicates
-          duplicate = {
-            fg = dim,
-            bg = pill_bg,
-            italic = true,
-          },
-          duplicate_visible = {
-            fg = neon_purple,
-            bg = pill_bg,
-            italic = true,
-          },
-          duplicate_selected = {
-            fg = neon_cyan,
-            bg = pill_bg,
-            italic = true,
-          },
-          -- Diagnostics
-          diagnostic = {
-            fg = dim,
-            bg = pill_bg,
-          },
-          diagnostic_visible = {
-            fg = neon_purple,
-            bg = pill_bg,
-          },
-          diagnostic_selected = {
-            fg = neon_cyan,
-            bg = pill_bg,
-            bold = true,
-          },
-          -- Errors
-          error = {
-            fg = neon_pink,
-            bg = pill_bg,
-          },
-          error_visible = {
-            fg = neon_pink,
-            bg = pill_bg,
-          },
-          error_selected = {
-            fg = neon_pink,
-            bg = pill_bg,
-            bold = true,
-          },
-          error_diagnostic = {
-            fg = neon_pink,
-            bg = pill_bg,
-          },
-          error_diagnostic_visible = {
-            fg = neon_pink,
-            bg = pill_bg,
-          },
-          error_diagnostic_selected = {
-            fg = neon_pink,
-            bg = pill_bg,
-            bold = true,
-          },
-          -- Warnings
-          warning = {
-            fg = neon_yellow,
-            bg = pill_bg,
-          },
-          warning_visible = {
-            fg = neon_yellow,
-            bg = pill_bg,
-          },
-          warning_selected = {
-            fg = neon_yellow,
-            bg = pill_bg,
-            bold = true,
-          },
-          warning_diagnostic = {
-            fg = neon_yellow,
-            bg = pill_bg,
-          },
-          warning_diagnostic_visible = {
-            fg = neon_yellow,
-            bg = pill_bg,
-          },
-          warning_diagnostic_selected = {
-            fg = neon_yellow,
-            bg = pill_bg,
-            bold = true,
-          },
-          -- Numbers
-          numbers = {
-            fg = neon_purple,
-            bg = pill_bg,
-          },
-          numbers_visible = {
-            fg = neon_purple,
-            bg = pill_bg,
-          },
-          numbers_selected = {
-            fg = neon_cyan,
-            bg = pill_bg,
-            bold = true,
-          },
-          -- Offset separator (NvimTree)
-          offset_separator = {
-            fg = neon_cyan,
-            bg = dark_bg,
-          },
-          -- Trunc markers
-          trunc_marker = {
-            fg = neon_pink,
-            bg = dark_bg,
-          },
+        
+        insert_at_end = false,
+        insert_at_start = false,
+        maximum_padding = 2,
+        minimum_padding = 1,
+        maximum_length = 30,
+        minimum_length = 0,
+        semantic_letters = true,
+        sidebar_filetypes = {
+          NvimTree = { text = " 󰙅 EXPLORER", align = "center" },
+          undotree = { text = "UNDOTREE" },
         },
+        letters = "asdfjkl;ghnmxcvbziowerutyqpASDFJKLGHNMXCVBZIOWERUTYQP",
+        no_name_title = "[No Name]",
+      })
+
+      -- ╔═══════════════════════════════════════════════════════════════╗
+      -- ║              HIGHLIGHTS CYBERPUNK NEON                       ║
+      -- ╚═══════════════════════════════════════════════════════════════╝
+      
+      -- Buffer actif - Style Cyberpunk avec coins arrondis
+      vim.api.nvim_set_hl(0, "BufferCurrent", { fg = "#0d0d0d", bg = neon_cyan, bold = true })
+      vim.api.nvim_set_hl(0, "BufferCurrentIndex", { fg = "#0d0d0d", bg = neon_cyan })
+      vim.api.nvim_set_hl(0, "BufferCurrentMod", { fg = neon_green, bg = neon_cyan, bold = true })
+      -- Sign groups used for left/right separators: fg should be previous bg, bg current bg
+      vim.api.nvim_set_hl(0, "BufferCurrentSign", { fg = neon_cyan, bg = pill_bg })
+      vim.api.nvim_set_hl(0, "BufferCurrentSignRight", { fg = neon_cyan, bg = pill_bg })
+      vim.api.nvim_set_hl(0, "BufferCurrentTarget", { fg = neon_pink, bg = neon_cyan, bold = true })
+      vim.api.nvim_set_hl(0, "BufferCurrentIcon", { fg = "#0d0d0d", bg = neon_cyan })
+      -- Ensure filename/logo uses cyan background and readable foreground when active
+      vim.api.nvim_set_hl(0, "BufferCurrentFilename", { fg = "#0d0d0d", bg = neon_cyan, bold = true })
+      vim.api.nvim_set_hl(0, "BufferCurrentName", { fg = "#0d0d0d", bg = neon_cyan })
+      vim.api.nvim_set_hl(0, "BufferCurrentBuffer", { fg = "#0d0d0d", bg = neon_cyan })
+      vim.api.nvim_set_hl(0, "BufferCurrentERROR", { fg = neon_pink, bg = neon_cyan, bold = true })
+      vim.api.nvim_set_hl(0, "BufferCurrentWARN", { fg = neon_yellow, bg = neon_cyan, bold = true })
+      vim.api.nvim_set_hl(0, "BufferCurrentINFO", { fg = neon_purple, bg = neon_cyan })
+      vim.api.nvim_set_hl(0, "BufferCurrentHINT", { fg = neon_green, bg = neon_cyan })
+      vim.api.nvim_set_hl(0, "BufferCurrentADDED", { fg = neon_green, bg = neon_cyan })
+      vim.api.nvim_set_hl(0, "BufferCurrentCHANGED", { fg = neon_orange, bg = neon_cyan })
+      vim.api.nvim_set_hl(0, "BufferCurrentDELETED", { fg = neon_pink, bg = neon_cyan })
+
+      -- Buffer visible (dans une autre fenêtre)
+      vim.api.nvim_set_hl(0, "BufferVisible", { fg = neon_purple, bg = pill_bg })
+      vim.api.nvim_set_hl(0, "BufferVisibleIndex", { fg = neon_purple, bg = pill_bg })
+      vim.api.nvim_set_hl(0, "BufferVisibleMod", { fg = neon_orange, bg = pill_bg })
+      vim.api.nvim_set_hl(0, "BufferVisibleSign", { fg = pill_bg, bg = "NONE" })
+      vim.api.nvim_set_hl(0, "BufferVisibleSignRight", { fg = pill_bg, bg = "NONE" })
+      vim.api.nvim_set_hl(0, "BufferVisibleTarget", { fg = neon_pink, bg = pill_bg, bold = true })
+      vim.api.nvim_set_hl(0, "BufferVisibleIcon", { fg = neon_purple, bg = pill_bg })
+      vim.api.nvim_set_hl(0, "BufferVisibleERROR", { fg = neon_pink, bg = pill_bg })
+      vim.api.nvim_set_hl(0, "BufferVisibleWARN", { fg = neon_yellow, bg = pill_bg })
+      vim.api.nvim_set_hl(0, "BufferVisibleINFO", { fg = neon_purple, bg = pill_bg })
+      vim.api.nvim_set_hl(0, "BufferVisibleHINT", { fg = neon_green, bg = pill_bg })
+      vim.api.nvim_set_hl(0, "BufferVisibleADDED", { fg = neon_green, bg = pill_bg })
+      vim.api.nvim_set_hl(0, "BufferVisibleCHANGED", { fg = neon_orange, bg = pill_bg })
+      vim.api.nvim_set_hl(0, "BufferVisibleDELETED", { fg = neon_pink, bg = pill_bg })
+
+      -- Buffer inactif
+      vim.api.nvim_set_hl(0, "BufferInactive", { fg = dim, bg = pill_bg })
+      vim.api.nvim_set_hl(0, "BufferInactiveIndex", { fg = dim, bg = pill_bg })
+      vim.api.nvim_set_hl(0, "BufferInactiveMod", { fg = neon_orange, bg = pill_bg })
+      vim.api.nvim_set_hl(0, "BufferInactiveSign", { fg = pill_bg, bg = "NONE" })
+      vim.api.nvim_set_hl(0, "BufferInactiveSignRight", { fg = pill_bg, bg = "NONE" })
+      vim.api.nvim_set_hl(0, "BufferInactiveTarget", { fg = neon_pink, bg = pill_bg, bold = true })
+      vim.api.nvim_set_hl(0, "BufferInactiveIcon", { fg = dim, bg = pill_bg })
+      vim.api.nvim_set_hl(0, "BufferInactiveERROR", { fg = neon_pink, bg = pill_bg })
+      vim.api.nvim_set_hl(0, "BufferInactiveWARN", { fg = neon_yellow, bg = pill_bg })
+      vim.api.nvim_set_hl(0, "BufferInactiveINFO", { fg = dim, bg = pill_bg })
+      vim.api.nvim_set_hl(0, "BufferInactiveHINT", { fg = dim, bg = pill_bg })
+      vim.api.nvim_set_hl(0, "BufferInactiveADDED", { fg = neon_green, bg = pill_bg })
+      vim.api.nvim_set_hl(0, "BufferInactiveCHANGED", { fg = neon_orange, bg = pill_bg })
+      vim.api.nvim_set_hl(0, "BufferInactiveDELETED", { fg = neon_pink, bg = pill_bg })
+
+      -- Fond de la tabline (transparent)
+      vim.api.nvim_set_hl(0, "BufferTabpageFill", { fg = dim, bg = "NONE" })
+      vim.api.nvim_set_hl(0, "BufferTabpages", { fg = neon_cyan, bg = "NONE", bold = true })
+      vim.api.nvim_set_hl(0, "BufferTabpagesSep", { fg = neon_cyan, bg = "NONE" })
+      
+      -- Offset (NvimTree)
+      vim.api.nvim_set_hl(0, "BufferOffset", { fg = neon_cyan, bg = "NONE", bold = true })
+      vim.api.nvim_set_hl(0, "BufferOffsetSeparator", { fg = neon_cyan, bg = "NONE" })
+
+      -- ScrollArrow
+      vim.api.nvim_set_hl(0, "BufferScrollArrow", { fg = neon_pink, bg = "NONE" })
+
+      -- Alternate buffer
+      vim.api.nvim_set_hl(0, "BufferAlternate", { fg = neon_purple, bg = pill_bg })
+      vim.api.nvim_set_hl(0, "BufferAlternateSign", { fg = pill_bg, bg = "NONE" })
+      vim.api.nvim_set_hl(0, "BufferAlternateSignRight", { fg = pill_bg, bg = "NONE" })
+      vim.api.nvim_set_hl(0, "BufferAlternateMod", { fg = neon_orange, bg = pill_bg })
+      vim.api.nvim_set_hl(0, "BufferAlternateTarget", { fg = neon_pink, bg = pill_bg, bold = true })
+      vim.api.nvim_set_hl(0, "BufferAlternateIcon", { fg = neon_purple, bg = pill_bg })
+      vim.api.nvim_set_hl(0, "BufferAlternateIndex", { fg = neon_purple, bg = pill_bg })
+      vim.api.nvim_set_hl(0, "BufferAlternateERROR", { fg = neon_pink, bg = pill_bg })
+      vim.api.nvim_set_hl(0, "BufferAlternateWARN", { fg = neon_yellow, bg = pill_bg })
+      vim.api.nvim_set_hl(0, "BufferAlternateINFO", { fg = dim, bg = pill_bg })
+      vim.api.nvim_set_hl(0, "BufferAlternateHINT", { fg = dim, bg = pill_bg })
+      vim.api.nvim_set_hl(0, "BufferAlternateADDED", { fg = neon_green, bg = pill_bg })
+      vim.api.nvim_set_hl(0, "BufferAlternateCHANGED", { fg = neon_orange, bg = pill_bg })
+      vim.api.nvim_set_hl(0, "BufferAlternateDELETED", { fg = neon_pink, bg = pill_bg })
+
+      -- Autocmd pour re-appliquer après changement de colorscheme
+      vim.api.nvim_create_autocmd("ColorScheme", {
+        pattern = "*",
+        callback = function()
+          vim.api.nvim_set_hl(0, "BufferCurrent", { fg = "#0d0d0d", bg = neon_cyan, bold = true })
+          vim.api.nvim_set_hl(0, "BufferCurrentSign", { fg = neon_cyan, bg = pill_bg })
+          vim.api.nvim_set_hl(0, "BufferCurrentSignRight", { fg = neon_cyan, bg = pill_bg })
+          vim.api.nvim_set_hl(0, "BufferCurrentIcon", { fg = "#0d0d0d", bg = neon_cyan })
+          vim.api.nvim_set_hl(0, "BufferCurrentFilename", { fg = "#0d0d0d", bg = neon_cyan, bold = true })
+          vim.api.nvim_set_hl(0, "BufferCurrentName", { fg = "#0d0d0d", bg = neon_cyan })
+          vim.api.nvim_set_hl(0, "BufferCurrentBuffer", { fg = "#0d0d0d", bg = neon_cyan })
+          vim.api.nvim_set_hl(0, "BufferInactive", { fg = dim, bg = pill_bg })
+          vim.api.nvim_set_hl(0, "BufferInactiveSign", { fg = pill_bg, bg = "NONE" })
+          vim.api.nvim_set_hl(0, "BufferInactiveSignRight", { fg = pill_bg, bg = "NONE" })
+          vim.api.nvim_set_hl(0, "BufferTabpageFill", { fg = dim, bg = "NONE" })
+        end,
       })
     end,
   },

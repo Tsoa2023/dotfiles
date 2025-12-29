@@ -48,6 +48,11 @@ local M = {
       St_ConfirmModeSep = { fg = "#00aaff", bg = "#1a1a2e" },
       St_SelectModeSep = { fg = "#ff00ff", bg = "#1a1a2e" },
       St_NterminalModeSep = { fg = "#bd00ff", bg = "#1a1a2e" },
+
+      -- Bufferline/TabLine transparency
+      TabLine = { bg = "NONE" },
+      TabLineFill = { bg = "NONE" },
+      TabLineSel = { bg = "NONE" },
     },
     hl_add = {
       NvDashLazy = { fg = "#bd00ff" },
