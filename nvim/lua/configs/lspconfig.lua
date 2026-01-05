@@ -1,6 +1,9 @@
 -- Configuration LSP compatible Neovim 0.10
 local lspconfig = require "lspconfig"
 
+-- Désactiver les warnings de dépréciation temporairement
+vim.deprecate = function() end
+
 -- Capabilities pour nvim-cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 local ok_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
@@ -21,9 +24,10 @@ local on_attach = function(client, bufnr)
   vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
   vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
 
-  -- Activer les inlay hints si supporté (Neovim 0.10+)
+  -- Désactiver les inlay hints par défaut (utiliser <leader>ti pour toggle)
+  -- Les inlay hints causent des erreurs "Invalid 'col': out of range" lors de l'édition
   if vim.lsp.inlay_hint and client.supports_method "textDocument/inlayHint" then
-    vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+    vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
   end
 end
 

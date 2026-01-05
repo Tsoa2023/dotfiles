@@ -56,6 +56,16 @@ map("n", "<leader>cp", "<cmd>Copilot panel<CR>", { desc = "Toggle Copilot Panel"
 map("n", "<leader>ce", "<cmd>Copilot enable<CR>", { desc = "Enable Copilot" })
 map("n", "<leader>cd", "<cmd>Copilot disable<CR>", { desc = "Disable Copilot" })
 
+-- ╔═══════════════════════════════════════════════════════════════╗
+-- ║              LSP KEYMAPS                                      ║
+-- ╚═══════════════════════════════════════════════════════════════╝
+-- Toggle inlay hints (suggestions de types)
+map("n", "<leader>ti", function()
+  local bufnr = vim.api.nvim_get_current_buf()
+  local current = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
+  vim.lsp.inlay_hint.enable(not current, { bufnr = bufnr })
+end, { desc = "Toggle Inlay Hints" })
+
 -- Suggestion navigation and acceptance (configured in copilot.lua)
 -- <M-l> - Accept suggestion
 -- <M-]> - Next suggestion
