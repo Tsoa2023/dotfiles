@@ -1,0 +1,9 @@
+[font]
+size = 9
+
+builtin_box_drawing = true
+
+normal = { family = "JetBrainsMono Nerd Font", style = "ExtraBold" }
+bold = { family = "FiraCode Nerd Font", style = "Bold" }
+italic = { family = "FiraCode Nerd Font", style = "Italic" }
+bold_italic = { family = "FiraCode Nerd Font", style = "Bold Italic" }

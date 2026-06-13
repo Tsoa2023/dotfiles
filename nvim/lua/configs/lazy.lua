@@ -11,6 +11,11 @@ return {
     },
   },
 
+  -- Increase git timeout to avoid clone/checkout timeouts on slow connections
+  git = {
+    timeout = 600, -- seconds
+  },
+
   performance = {
     rtp = {
       disabled_plugins = {

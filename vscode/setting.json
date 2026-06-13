@@ -1,0 +1,366 @@
+{
+  // ============================================================
+  //  PHILOSOPHIE : Minimaliste, clavier-centré, esthétique
+  //  Inspiré du tutoriel : VSCode + Neovim Setup
+  // ============================================================
+
+  // --- Interface épurée (Zen Mode + éléments superflus masqués) ---
+  "editor.minimap.enabled": false,
+  "editor.scrollbar.horizontalScrollbarSize": 0,
+  "editor.scrollbar.verticalScrollbarSize": 0,
+  "editor.overviewRulerBorder": false,
+  "editor.hideCursorInOverviewRuler": true,
+  "editor.renderLineHighlight": "all",
+  "editor.lineNumbers": "relative",          // numéros relatifs pour les motions Vim
+  "editor.guides.indentation": false,
+  "editor.guides.bracketPairs": false,
+  "editor.foldingHighlight": false,
+  "editor.foldingMaximumRegions": 5,
+  "editor.occurrencesHighlight": "off",
+  "editor.matchBrackets": "never",
+  "editor.selectionHighlight": false,
+  "editor.smoothScrolling": true,
+  "editor.cursorBlinking": "solid",
+  "editor.cursorStyle": "line",
+  "editor.cursorWidth": 2,
+  "editor.fontFamily": "'JetBrains Mono', 'Cascadia Code', 'Fira Code', 'Hack', monospace",
+  "editor.fontLigatures": true,
+  "editor.fontSize": 14,
+  "editor.lineHeight": 24,
+  "editor.letterSpacing": 0.5,
+  "editor.wordWrap": "off",
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": true,
+  "editor.renderWhitespace": "selection",
+  "editor.renderControlCharacters": false,
+  "editor.linkedEditing": true,
+  "editor.stickyScroll.enabled": false,
+
+  // --- Fichiers et explorateur ---
+  "explorer.autoReveal": false,
+  "explorer.compactFolders": false,
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "explorer.openEditors.visible": 0,
+  "explorer.decorations.badges": false,
+  "explorer.sortOrder": "type",
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**/node_modules": false,     // visible mais replié
+    "**/__pycache__": true,
+    "**/.next": false,
+    "**/dist": false,
+    "**/build": false
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/*.code-search": true,
+    "**/dist": true,
+    "**/build": true,
+    "**/.next": true
+  },
+  "files.autoSave": "onFocusChange",
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.simpleDialog.enable": true,
+
+  // --- Barres et panneaux ---
+  "workbench.activityBar.location": "hidden",      // barre d'activités masquée (optionnel)
+  "workbench.statusBar.visible": true,
+  "workbench.layoutControl.enabled": false,
+  "workbench.tips.enabled": false,
+  "workbench.startupEditor": "none",
+  "workbench.settings.editor": "json",
+  "workbench.colorTheme": "One Dark Pro Darker",   // thème sombre choisi
+  "workbench.iconTheme": "material-icon-theme",
+  "window.title": "${activeEditorShort}${separator}${rootName}",
+  "window.titleBarStyle": "custom",
+  "window.commandCenter": false,
+  "window.menuBarVisibility": "toggle",            // menu visible uniquement via Alt
+  "window.zoomLevel": 0,
+  "zenMode.centerLayout": false,                   // DÉSACTIVÉ : pas de centrage
+  "zenMode.fullScreen": false,
+  "zenMode.hideLineNumbers": false,                // ligne de numéros conservée en Zen
+  "zenMode.hideStatusBar": true,
+  "zenMode.silentNotifications": true,
+  "zenMode.restore": true,
+
+  // --- Terminal intégré ---
+  "terminal.integrated.fontFamily": "'JetBrains Mono', 'MesloLGS NF', monospace",
+  "terminal.integrated.fontSize": 13,
+  "terminal.integrated.lineHeight": 1.4,
+  "terminal.integrated.cursorBlinking": false,
+  "terminal.integrated.cursorStyle": "underline",
+  "terminal.integrated.cursorWidth": 2,
+  "terminal.integrated.enableBell": false,
+  "terminal.integrated.rightClickBehavior": "copyPaste",
+  "terminal.integrated.gpuAcceleration": "auto",
+  "terminal.integrated.defaultProfile.linux": "zsh",
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "terminal.integrated.defaultProfile.windows": "pwsh",
+  "terminal.integrated.shellIntegration.enabled": true,
+  "terminal.integrated.showExitAlert": false,
+  "terminal.integrated.tabs.enabled": false,
+  "terminal.integrated.scrollback": 5000,
+  "terminal.integrated.macOptionIsMeta": true,     // Option = Meta (pour shell Vi mode)
+
+  // --- Neovim (via vscode-neovim) ---
+  "vscode-neovim.compositeKeys": {
+    "jk": {
+      "command": "vscode-neovim.escape"
+    },
+    "kj": {
+      "command": "vscode-neovim.escape"
+    }
+  },
+  "vscode-neovim.neovimExecutablePaths.darwin": "/opt/homebrew/bin/nvim",
+  "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
+  "vscode-neovim.useCtrlKeysForInsertMode": false,
+  "vscode-neovim.highlightYank": true,
+  "vscode-neovim.highlightYankDelay": 150,
+  "vscode-neovim.highlightVimSearch": true,
+  "vscode-neovim.highlightVimSearchHighlightDuration": 500,
+  "vscode-neovim.relativenumber": true,
+  "vscode-neovim.scroll": {
+    "scrollBindWithVim": false,
+    "scrollBypassKeys": ["j", "k", "ctrl-d", "ctrl-u", "ctrl-f", "ctrl-b"]
+  },
+  "vscode-neovim.enableNeovimDiagnostics": false,
+  "vscode-neovim.statusBarColorControl": true,
+  "vscode-neovim.neovimWidth": 0,
+  "vscode-neovim.NeovimClean": 1,
+  "vscode-neovim.useWSL": false,
+  // Commande personnalisée pour inspirer : Ctrl+n en mode Normal pour basculer l'Explorateur
+  "vscode-neovim.commandLineModeKeybindingsNonRecursive": true,
+
+  // --- Harpoon (navigation rapide) ---
+  "harpoon.keybindings": [
+    {
+      "key": "ctrl+e",
+      "command": "harpoon.toggleQuickMenu"
+    },
+    {
+      "key": "ctrl+a",
+      "command": "harpoon.addFile"
+    },
+    {
+      "key": "ctrl+1",
+      "command": "harpoon.goToFile",
+      "args": 0
+    },
+    {
+      "key": "ctrl+2",
+      "command": "harpoon.goToFile",
+      "args": 1
+    },
+    {
+      "key": "ctrl+3",
+      "command": "harpoon.goToFile",
+      "args": 2
+    },
+    {
+      "key": "ctrl+4",
+      "command": "harpoon.goToFile",
+      "args": 3
+    }
+  ],
+  "harpoon.showSummaryOnJump": false,
+
+  // --- Autocomplétion et suggestions ---
+  "editor.suggestSelection": "first",
+  "editor.inlineSuggest.enabled": true,
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": false,
+    "strings": true
+  },
+  "editor.snippetSuggestions": "inline",
+  "editor.suggest.showKeywords": true,
+  "editor.suggest.showSnippets": true,
+  "editor.suggest.showStatusBar": false,
+  "editor.suggest.preview": true,
+  "editor.suggest.localityBonus": true,
+  "editor.suggest.shareSuggestSelections": true,
+  "editor.wordBasedSuggestions": "matchingDocuments",
+  "editor.parameterHints.enabled": true,
+  "editor.parameterHints.cycle": true,
+
+  // --- IntelliSense et langages ---
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.organizeImports": "explicit"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": false,
+  "editor.linkedEditing": true,
+  "editor.stablePeek": true,
+  "editor.inlayHints.enabled": "offUnlessPressed",
+  "editor.inlayHints.padding": true,
+
+  // --- Git intégré ---
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "git.enableSmartCommit": true,
+  "git.showPushSuccessNotification": false,
+  "git.decorations.enabled": false,           // moins de déco dans l'explorateur
+  "git.branchProtection": ["main", "master"],
+  "git.inputValidationSubjectLength": 72,
+
+  // --- Extensions spécifiques (recommandées par le tutoriel) ---
+  // Material Icon Theme
+  "material-icon-theme.folders.theme": "specific",
+  "material-icon-theme.hidesExplorerArrows": true,
+  "material-icon-theme.activeIconPack": "none",
+  "material-icon-theme.saturation": 0.8,
+  "material-icon-theme.opacity": 1,
+
+  // Prettier
+  "prettier.requireConfig": false,
+  "prettier.singleQuote": true,
+  "prettier.semi": true,
+  "prettier.trailingComma": "all",
+  "prettier.tabWidth": 2,
+  "prettier.printWidth": 100,
+  "prettier.arrowParens": "always",
+  "prettier.endOfLine": "lf",
+
+  // ESLint
+  "eslint.format.enable": false,
+  "eslint.lintTask.enable": true,
+  "eslint.alwaysShowStatus": false,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "vue",
+    "html",
+    "markdown",
+    "json"
+  ],
+
+  // Language-specific
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one",
+    "editor.wordWrap": "on",
+    "editor.quickSuggestions": {
+      "other": false,
+      "comments": false,
+      "strings": true
+    }
+  },
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    }
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.autoIndent": "advanced"
+  },
+
+  // --- Raccourcis clavier personnalisés (keybindings.json) ---
+  // NOTE : ces raccourcis sont définis ici à titre indicatif.
+  // Pour les appliquer, il faut les placer dans keybindings.json.
+  // Les valeurs ci-dessous sont un commentaire documenté :
+  // {
+  //   "key": "ctrl+n",         ->  toggle explorer (workbench.action.toggleSidebarVisibility)
+  //   "key": "ctrl+shift+n",   ->  nouveau fichier
+  //   "key": "ctrl+f",         ->  rechercher dans le fichier
+  //   "key": "ctrl+shift+f",   ->  rechercher dans tous les fichiers
+  //   "key": "alt+up",         ->  déplacer la ligne vers le haut
+  //   "key": "alt+down",       ->  déplacer la ligne vers le bas
+  //   "key": "ctrl+d",         ->  sélection multi-curseur
+  //   "key": "ctrl+shift+l",   ->  sélectionner toutes les occurrences
+  //   "key": "ctrl+p",         ->  palette de commandes
+  //   "key": "ctrl+b",         ->  basculer la barre latérale
+  //   "key": "ctrl+`",         ->  terminal intégré
+  //   "key": "ctrl+w",         ->  fermer l'onglet
+  //   "key": "ctrl+tab",       ->  onglet suivant
+  //   "key": "ctrl+shift+tab", ->  onglet précédent
+  // }
+
+  // --- Émulation Vim (via vscode-neovim) ---
+  // Raccourcis en mode Insertion
+  "editor.autoClosingBrackets": "always",
+  "editor.autoClosingQuotes": "always",
+  "editor.autoClosingDelete": "auto",
+  "editor.autoClosingOvertype": "always",
+  "editor.autoSurround": "languageDefined",
+
+  // --- Extras esthétiques ---
+  "window.density.editorTabHeight": "compact",
+  "workbench.colorCustomizations": {
+    "editor.background": "#1a1b26",
+    "sideBar.background": "#16161e",
+    "terminal.background": "#1a1b26",
+    "activityBar.background": "#16161e",
+    "titleBar.activeBackground": "#16161e",
+    "statusBar.background": "#16161e",
+    "tab.activeBackground": "#1a1b26",
+    "tab.inactiveBackground": "#16161e",
+    "editorLineNumber.foreground": "#3b4261",
+    "editorLineNumber.activeForeground": "#7aa2f7",
+    "selection.background": "#33467c"
+  },
+
+  // --- Fonctionnalités désactivées pour la propreté ---
+  "breadcrumbs.enabled": false,
+  "editor.codeLens": false,
+  "editor.colorDecorators": false,
+  "editor.lightbulb.enabled": "off",
+  "editor.referenceInfo.enabled": false,
+  "editor.showDeprecated": false,
+  "editor.unusualLineTerminators": "off",
+
+  // --- Télémetrie et mises à jour ---
+  "telemetry.telemetryLevel": "off",
+  "update.showReleaseNotes": false,
+  "extensions.autoCheckUpdates": true,
+  "extensions.autoUpdate": true,
+  "extensions.ignoreRecommendations": true
+}
+

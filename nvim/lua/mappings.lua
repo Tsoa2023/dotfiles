@@ -9,6 +9,29 @@ map("i", "jk", "<ESC>")
 -- Save in normal, insert, and visual modes
 map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 
+-- Barbar navigation (remplace BufferLine)
+map("n", "<Tab>", "<cmd>BufferNext<CR>", { desc = "Buffer suivant" })
+map("n", "<S-Tab>", "<cmd>BufferPrevious<CR>", { desc = "Buffer précédent" })
+map("n", "<leader>x", "<cmd>BufferClose<CR>", { desc = "Fermer le buffer" })
+map("n", "<leader>bp", "<cmd>BufferPin<CR>", { desc = "Pin/Unpin buffer" })
+map("n", "<leader>bP", "<cmd>BufferCloseAllButPinned<CR>", { desc = "Fermer les buffers non-pinnés" })
+map("n", "<leader>bo", "<cmd>BufferCloseAllButCurrent<CR>", { desc = "Fermer les autres buffers" })
+map("n", "<leader>bl", "<cmd>BufferCloseBuffersRight<CR>", { desc = "Fermer les buffers à droite" })
+map("n", "<leader>bh", "<cmd>BufferCloseBuffersLeft<CR>", { desc = "Fermer les buffers à gauche" })
+map("n", "<leader>1", "<cmd>BufferGoto 1<CR>", { desc = "Aller au buffer 1" })
+map("n", "<leader>2", "<cmd>BufferGoto 2<CR>", { desc = "Aller au buffer 2" })
+map("n", "<leader>3", "<cmd>BufferGoto 3<CR>", { desc = "Aller au buffer 3" })
+map("n", "<leader>4", "<cmd>BufferGoto 4<CR>", { desc = "Aller au buffer 4" })
+map("n", "<leader>5", "<cmd>BufferGoto 5<CR>", { desc = "Aller au buffer 5" })
+map("n", "<leader>6", "<cmd>BufferGoto 6<CR>", { desc = "Aller au buffer 6" })
+map("n", "<leader>7", "<cmd>BufferGoto 7<CR>", { desc = "Aller au buffer 7" })
+map("n", "<leader>8", "<cmd>BufferGoto 8<CR>", { desc = "Aller au buffer 8" })
+map("n", "<leader>9", "<cmd>BufferGoto 9<CR>", { desc = "Aller au buffer 9" })
+map("n", "<leader>0", "<cmd>BufferLast<CR>", { desc = "Aller au dernier buffer" })
+map("n", "<A-<>", "<cmd>BufferMovePrevious<CR>", { desc = "Déplacer buffer à gauche" })
+map("n", "<A->>", "<cmd>BufferMoveNext<CR>", { desc = "Déplacer buffer à droite" })
+map("n", "<leader>bb", "<cmd>BufferPick<CR>", { desc = "Choisir un buffer" })
+
 -- Add mappings for 'menu' plugin
 
 -- Redimensionner les fenêtres
@@ -25,6 +48,29 @@ map("n", "-", "<cmd>horizontal resize -5<CR>", { desc = "Resize Window Down" })
 map("n", "<C-t>", function()
   require("menu").open("default")
 end, { desc = "Open default menu" })
+
+-- ╔═══════════════════════════════════════════════════════════════╗
+-- ║              GITHUB COPILOT KEYMAPS                          ║
+-- ╚═══════════════════════════════════════════════════════════════╝
+map("n", "<leader>cp", "<cmd>Copilot panel<CR>", { desc = "Toggle Copilot Panel" })
+map("n", "<leader>ce", "<cmd>Copilot enable<CR>", { desc = "Enable Copilot" })
+map("n", "<leader>cd", "<cmd>Copilot disable<CR>", { desc = "Disable Copilot" })
+
+-- ╔═══════════════════════════════════════════════════════════════╗
+-- ║              LSP KEYMAPS                                      ║
+-- ╚═══════════════════════════════════════════════════════════════╝
+-- Toggle inlay hints (suggestions de types)
+map("n", "<leader>ti", function()
+  local bufnr = vim.api.nvim_get_current_buf()
+  local current = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
+  vim.lsp.inlay_hint.enable(not current, { bufnr = bufnr })
+end, { desc = "Toggle Inlay Hints" })
+
+-- Suggestion navigation and acceptance (configured in copilot.lua)
+-- <M-l> - Accept suggestion
+-- <M-]> - Next suggestion
+-- <M-[> - Previous suggestion
+-- <C-]> - Dismiss suggestion
 
 -- Mouse users + NvimTree users - opens contextual menu with right-click
 map("n", "<RightMouse>", function()
@@ -82,8 +128,21 @@ end
 map('v', '<A-j>', ':lua MoveSelectionDown()<CR>', { noremap = true, silent = true })
 map('v', '<A-k>', ':lua MoveSelectionUp()<CR>', { noremap = true, silent = true })
 
-map("n", "<C-a>j", "<cmd>NvimTreeToggle<CR>", { noremap = true, silent = true, desc = "Toggle NvimTree" })
+map("n", "<C-j>", "<cmd>NvimTreeToggle<CR>", { noremap = true, silent = true, desc = "Toggle NvimTree" })
 map("n", "<C-n>", "<cmd>VMLive<CR>", { desc = "Visual Multi: VMLive" })
 
 map("n", "<A-u>", "<cmd>UndotreeToggle<CR>", { desc = "Toggle Undotree" })
-map("n", "<leader>q", ":bd<CR>", { silent = true, desc = "buffer delete" })
+map("n", "<leader>q", ":bufdo bd<CR>", { silent = true, desc = "buffer delete" })
+
+map({ "n", "t" }, "<A-i>", function()
+	require("nvchad.term").toggle {
+		pos = "float",
+		id = "floatTerm",
+		float_opts = {
+			row = 0.35,
+			col = 5.95,
+			width = 0.65,
+			height = 1.0,
+		},
+	}
+end, { desc = "terminaltoggle floating term" })

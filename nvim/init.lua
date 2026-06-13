@@ -29,9 +29,15 @@ require("lazy").setup({
 dofile(vim.g.base46_cache .. "defaults")
 dofile(vim.g.base46_cache .. "statusline")
 
-require("notify").setup({
-  background_colour = "#000000",
-})
+-- Setup notify après le chargement des plugins
+vim.schedule(function()
+  local ok, notify = pcall(require, "notify")
+  if ok then
+    notify.setup({
+      background_colour = "#000000",
+    })
+  end
+end)
 
 require "options"
 require "nvchad.autocmds"
@@ -39,3 +45,11 @@ require "nvchad.autocmds"
 vim.schedule(function()
   require "mappings"
 end)
+
+vim.opt.conceallevel = 2
+vim.opt.concealcursor = "nc"
+
+vim.opt.shiftwidth = 2
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.expandtab = true

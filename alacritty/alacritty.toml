@@ -1,0 +1,40 @@
+import = ["~/.config/alacritty/rice-colors.toml", "~/.config/alacritty/fonts.toml"]
+
+live_config_reload = true
+
+[cursor]
+blink_interval = 550
+unfocused_hollow = false
+thickness = 0.15
+
+[cursor.style]
+blinking = "On"
+shape = "Block"
+
+[selection]
+save_to_clipboard = true
+
+[window.dimensions]
+columns = 300
+lines = 80
+
+[window]
+decorations = "none"
+dynamic_title = true
+opacity = 0.9 
+dynamic_padding = true
+
+[window.padding]
+x = 10
+y = 10
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[bell]
+animation = "Linear"
+duration = 0
+
+[env]
+term = "xterm-256color"
