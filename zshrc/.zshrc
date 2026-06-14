@@ -147,6 +147,9 @@ alias nvim='/home/fharifen/appimage/nvim.appimage'
 alias nvimf='nvim $(\fzf --style full)'
 alias fzf="fzf --style full --preview 'fzf-preview.sh {}' --bind 'focus:transform-header:file --brief {}'"
 alias zshrc='source ~/.zshrc'
+alias ls='lsd'
+alias la='lsd -la'
+alias l='lsd -l'
 # alias gcc='z'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
@@ -177,3 +180,4 @@ function cdd {
 
 alias lss='ls -lia --group-directories-first --color=auto'
 export PATH=/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/home/fharifen/.gem/ruby/3.0.2/bin:/home/fharifen/.local/bin:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/home/fharifen/.gem/ruby/3.0.2/bin:/home/fharifen/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/fharifen/appimage/:/home/fharifen/development/flutter/bin:/home/fharifen/Android/Sdk/cmdline-tools/latest/bin:/home/fharifen/Android/Sdk/platform-tools:/usr/lib/jvm/java-17-openjdk-amd64/bin:/home/fharifen/appimage/:/home/fharifen/development/flutter/bin:/home/fharifen/Android/Sdk/cmdline-tools/latest/bin:/home/fharifen/Android/Sdk/platform-tools:/usr/lib/jvm/java-17-openjdk-amd64/bin:/home/fharifen/.local/bin:/home/fharifen/.local/bin
+export VAGRANT_DEFAULT_PROVIDER=virtualbox
