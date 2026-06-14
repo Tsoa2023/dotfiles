@@ -1,0 +1,101 @@
+[
+    // === vspacecode (space menu) ===
+    {
+        "key": "space",
+        "command": "vspacecode.space",
+        "when": "activeeditorgroupempty && focusedview == '' && !whichkeyactive && !inputfocus"
+    },
+    {
+        "key": "space",
+        "command": "vspacecode.space",
+        "when": "sidebarfocus && !inputfocus && !whichkeyactive"
+    },
+
+    // === navigation rapide (harpoon) ===
+    // {
+    //     "key": "ctrl+a",
+    //     "commands": ["vscode-harpoon.addeditor"]
+
+    // },
+    // {
+    //     "key": "ctrl+e",
+    //     "command": ["vscode-harpoon.togglequickmenu"]
+    // },
+    // {
+    //     "key": "ctrl+1",
+    //     "command": ["vscode-harpoon.gotofile"],
+    //     "args": 0
+    // },
+    // {
+    //     "key": "ctrl+2",
+    //     "command": ["vscode-harpoon.gotofile"],
+    //     "args": 1
+    // },
+    // {
+    //     "key": "ctrl+3",
+    //     "command": ["vscode-harpoon.gotofile"],
+    //     "args": 2
+    // },
+    // {
+    //     "key": "ctrl+4",
+    //     "command": ["vscode-harpoon.goToFile"],
+    //     "args": 3
+    // },
+    {
+        "key": "ctrl+a",
+        "commands": ["vscode-harpoon.addEditor"]
+    },
+    {
+        "key": "ctrl+e",
+        "commands": ["vscode-harpoon.editEditors"]
+    },
+    {
+        "key": "ctrl+p",
+        "commands": ["vscode-harpoon.editorQuickPick"]
+    },
+    {
+        "key": "ctrl+1",
+        "command": "vscode-harpoon.gotoEditor1"
+    },
+    {
+        "key": "ctrl+2",
+        "command": "vscode-harpoon.gotoEditor2"
+    },
+    {
+        "key": "ctrl+3",
+        "command": "vscode-harpoon.gotoEditor3"
+    },
+    {
+        "key": "ctrl+4",
+        "command": "vscode-harpoon.gotoEditor4"
+    },
+
+    // === Éditeur et fichiers ===
+    { "key": "ctrl+n", "command": "workbench.action.toggleSidebarVisibility" },
+    { "key": "ctrl+shift+n", "command": "workbench.action.files.newUntitledFile" },
+    { "key": "ctrl+w", "command": "workbench.action.closeActiveEditor" },
+    { "key": "ctrl+shift+w", "command": "workbench.action.closeAllEditors" },
+    { "key": "ctrl+tab", "command": "workbench.action.nextEditor" },
+    { "key": "ctrl+shift+tab", "command": "workbench.action.previousEditor" },
+
+    // === Recherche ===
+    { "key": "ctrl+f", "command": "actions.find" },
+    { "key": "ctrl+h", "command": "editor.action.startFindReplaceAction" },
+    { "key": "ctrl+shift+f", "command": "workbench.view.search" },
+
+    // === Terminal ===
+    { "key": "ctrl+grave", "command": "workbench.action.terminal.toggleTerminal" },
+    { "key": "ctrl+shift+grave", "command": "workbench.action.createTerminal" },
+
+    // === Commandes VS Code ===
+    { "key": "ctrl+shift+p", "command": "workbench.action.showCommands" },
+    { "key": "ctrl+p", "command": "workbench.action.quickOpen" },
+
+    // === Édition ===
+    { "key": "alt+up", "command": "editor.action.moveLinesUpAction" },
+    { "key": "alt+down", "command": "editor.action.moveLinesDownAction" },
+    { "key": "ctrl+d", "command": "editor.action.addSelectionToNextFindMatch" },
+    { "key": "ctrl+shift+l", "command": "editor.action.selectHighlights" },
+    { "key": "ctrl+shift+i", "command": "editor.action.formatDocument" }
+]
+
