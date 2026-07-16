@@ -1,9 +1,6 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
@@ -81,9 +78,13 @@ plugins=(
     git
     zsh-autosuggestions
     zsh-syntax-highlighting
+    zsh-system-clipboard
 )
 
 source $ZSH/oh-my-zsh.sh
+ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
+source ~/.zsh/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+
 # Si TMUX est déjà défini, ne pas lancer une nouvelle session
 start_tmux() {
   # Vérifie si tmux est déjà lancé
@@ -137,13 +138,62 @@ export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 export PATH=$PATH:$JAVA_HOME/bin
 export PATH="$HOME/.gem/ruby/$(ruby -e 'print RUBY_VERSION')/bin:$PATH"
 
+
+
+
 alias clip='xclip -selection clipboard'
 alias pclip='pwd | clip'
 alias maked='make re;make clean;clear'
 alias nvim='/home/fharifen/appimage/nvim.appimage'
 alias cdz='z'
+alias mech='Mechvibes.appimage'
+alias obsidian='Obsidian.AppImage'
+alias jan='Jan_0.8.3_amd64.AppImage'
+alias whispr='/home/fharifen/appimage/OpenWhispr.AppImage'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 eval "$(oh-my-posh init zsh --config $POSH_THEMES_PATH/M365Princess.omp.json)"
 eval "$(zoxide init zsh)"  # Remplacez `zsh` par `bash` si vous utilisez Bash
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+cheats() {
+    local selected
+
+    selected=$(fzf < ~/.config/cheats/terminal.txt) || return
+
+    LBUFFER+="$selected"
+    CURSOR=${#LBUFFER}
+
+    zle redisplay
+}
+
+zle -N cheats
+
+function zvm_after_init() {
+    bindkey -M viins '^A' beginning-of-line
+    bindkey -M viins '^E' end-of-line
+    bindkey -M viins '^R' history-incremental-search-backward
+    bindkey -M viins '^U' backward-kill-line
+    bindkey -M viins '^W' backward-kill-word
+    bindkey -M viins '^K' kill-line
+    bindkey -M viins '^L' clear-screen
+
+    bindkey -M viins '^G' cheats
+    bindkey -M vicmd '^G' cheats
+
+    bindkey -M vicmd 'yy' zsh-system-clipboard-vicmd-vi-yank-whole-line
+    bindkey -M vicmd 'p' zvm_paste_clipboard_after
+    bindkey -M vicmd 'P' zvm_paste_clipboard_before
+
+}
+
+function zvm_after_lazy_keybindings() {
+    bindkey -M vicmd 'p' zvm_paste_clipboard_after
+    bindkey -M vicmd 'P' zvm_paste_clipboard_before
+}
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/fharifen/.local/bin:$PATH"
