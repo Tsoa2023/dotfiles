@@ -4,9 +4,9 @@ return {
     cmd = { "Stdheader" },
     keys = { "<F1>" },
     opts = {
-      default_map = true, -- Default mapping <F1> in normal mode.
-      auto_update = true, -- Update header when saving.
-      user = "fharifen", -- Your user.
+      default_map = true,                          -- Default mapping <F1> in normal mode.
+      auto_update = true,                          -- Update header when saving.
+      user = "fharifen",                           -- Your user.
       mail = "fharifen@student.42antananarivo.mg", -- Your mail.
       -- add other options.
     },
@@ -18,7 +18,7 @@ return {
   {
     "glepnir/galaxyline.nvim",
     branch = 'main',
-    requires = {'kyazdani42/nvim-web-devicons', opt = true},
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
     config = function()
       require('configs.galaxyline')
     end,
@@ -38,8 +38,9 @@ return {
     event = "InsertEnter",
     config = function()
       -- Keymaps personnalisés pour Copilot
-      vim.g.copilot_no_tab_map = true  -- Désactiver Tab par défaut pour éviter conflit
-      vim.keymap.set("i", "<M-l>", 'copilot#Accept("<CR>")', { expr = true, replace_keycodes = false, desc = "Copilot Accept" })
+      vim.g.copilot_no_tab_map = true -- Désactiver Tab par défaut pour éviter conflit
+      vim.keymap.set("i", "<M-l>", 'copilot#Accept("<CR>")',
+        { expr = true, replace_keycodes = false, desc = "Copilot Accept" })
       vim.keymap.set("i", "<M-]>", "<Plug>(copilot-next)", { desc = "Copilot Next" })
       vim.keymap.set("i", "<M-[>", "<Plug>(copilot-previous)", { desc = "Copilot Previous" })
       vim.keymap.set("i", "<C-]>", "<Plug>(copilot-dismiss)", { desc = "Copilot Dismiss" })
@@ -78,42 +79,42 @@ return {
         tabpages = true,
         clickable = true,
         focus_on_close = "left",
-        
+
         icons = {
           buffer_index = false,
           buffer_number = false,
           button = "󰅙",
-          
+
           diagnostics = {
             [vim.diagnostic.severity.ERROR] = { enabled = true, icon = " " },
             [vim.diagnostic.severity.WARN] = { enabled = true, icon = " " },
             [vim.diagnostic.severity.INFO] = { enabled = true, icon = " " },
             [vim.diagnostic.severity.HINT] = { enabled = true, icon = "󰌵 " },
           },
-          
+
           gitsigns = {
             added = { enabled = true, icon = "+" },
             changed = { enabled = true, icon = "~" },
             deleted = { enabled = true, icon = "-" },
           },
-          
+
           modified = { button = "●" },
           pinned = { button = "󰐃", filename = true },
-          
+
           -- Séparateurs Powerline arrondis (Nerd Font Powerline Extra)
           separator = { left = "", right = "" },
           separator_at_end = true,
-          
+
           inactive = { separator = { left = "", right = "" } },
           current = { buffer_index = false },
           visible = { modified = { buffer_number = false } },
-          
+
           filetype = {
             custom_colors = false,
             enabled = true,
           },
         },
-        
+
         insert_at_end = false,
         insert_at_start = false,
         maximum_padding = 2,
@@ -132,7 +133,7 @@ return {
       -- ╔═══════════════════════════════════════════════════════════════╗
       -- ║              HIGHLIGHTS CYBERPUNK NEON                       ║
       -- ╚═══════════════════════════════════════════════════════════════╝
-      
+
       -- Buffer actif - Style Cyberpunk avec coins arrondis
       vim.api.nvim_set_hl(0, "BufferCurrent", { fg = "#0d0d0d", bg = neon_cyan, bold = true })
       vim.api.nvim_set_hl(0, "BufferCurrentIndex", { fg = "#0d0d0d", bg = neon_cyan })
@@ -190,7 +191,7 @@ return {
       vim.api.nvim_set_hl(0, "BufferTabpageFill", { fg = dim, bg = "NONE" })
       vim.api.nvim_set_hl(0, "BufferTabpages", { fg = neon_cyan, bg = "NONE", bold = true })
       vim.api.nvim_set_hl(0, "BufferTabpagesSep", { fg = neon_cyan, bg = "NONE" })
-      
+
       -- Offset (NvimTree)
       vim.api.nvim_set_hl(0, "BufferOffset", { fg = neon_cyan, bg = "NONE", bold = true })
       vim.api.nvim_set_hl(0, "BufferOffsetSeparator", { fg = neon_cyan, bg = "NONE" })
@@ -264,7 +265,7 @@ return {
     dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
     config = function()
       local mason_lspconfig = require("mason-lspconfig")
-      
+
       mason_lspconfig.setup({
         ensure_installed = {
           "ts_ls",
@@ -278,7 +279,7 @@ return {
         },
         automatic_installation = true,
       })
-      
+
       -- Charger la configuration lspconfig après mason-lspconfig
       require("configs.lspconfig")
     end,
@@ -345,9 +346,9 @@ return {
 
       opts.sources = cmp.config.sources {
         { name = "nvim_lsp", priority = 1000 },
-        { name = "luasnip", priority = 750 },
-        { name = "buffer", priority = 500 },
-        { name = "path", priority = 250 },
+        { name = "luasnip",  priority = 750 },
+        { name = "buffer",   priority = 500 },
+        { name = "path",     priority = 250 },
       }
 
       opts.window = {
@@ -437,17 +438,17 @@ return {
   { "nvzone/menu", lazy = true },
 
 
-	{
-	  "rcarriga/nvim-notify",
-	  config = function()
-		require("notify").setup({
-		  timeout = 100,               -- plus rapide (en ms)
-		  top_down = false,           -- bas de l'écran
-		  render = "default",         -- ou "minimal" pour un style épuré
-		})
-		vim.notify = require("notify")
-	  end,
-	},
+  {
+    "rcarriga/nvim-notify",
+    config = function()
+      require("notify").setup({
+        timeout = 100,      -- plus rapide (en ms)
+        top_down = false,   -- bas de l'écran
+        render = "default", -- ou "minimal" pour un style épuré
+      })
+      vim.notify = require("notify")
+    end,
+  },
   -- lazy.nvim
   {
     "folke/noice.nvim",
@@ -477,11 +478,11 @@ return {
         },
         -- you can enable a preset for easier configuration
         presets = {
-          bottom_search = true, -- use a classic bottom cmdline for search
-          command_palette = true, -- position the cmdline and popupmenu together
+          bottom_search = true,         -- use a classic bottom cmdline for search
+          command_palette = true,       -- position the cmdline and popupmenu together
           long_message_to_split = true, -- long messages will be sent to a split
-          inc_rename = false, -- enables an input dialog for inc-rename.nvim
-          lsp_doc_border = false, -- add a border to hover docs and signature help
+          inc_rename = false,           -- enables an input dialog for inc-rename.nvim
+          lsp_doc_border = false,       -- add a border to hover docs and signature help
         },
       }
     end,
@@ -489,84 +490,84 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
-    highlight = { enble = false }, -- Désactive Treesitter
+      highlight = { enble = false }, -- Désactive Treesitter
     },
   },
   {
-	"mg979/vim-visual-multi",
-	branch = "master",
-	lazy = false,
-	plugin = true,
-	  config = function()
-		vim.g.VM_leader = "\\" -- Définir un leader spécifique pour éviter les conflits
-	  end,
+    "mg979/vim-visual-multi",
+    branch = "master",
+    lazy = false,
+    plugin = true,
+    config = function()
+      vim.g.VM_leader = "\\" -- Définir un leader spécifique pour éviter les conflits
+    end,
   },
-	{
-	"kylechui/nvim-surround",
-	version = "*", -- Use for stability; omit to use `main` branch for the latest features
-	event = "VeryLazy",
-		config = function()
-			require("nvim-surround").setup({
-				-- Configuration here, or leave empty to use defaults
-			})
-		end,
-	},
-	{
-	  'numToStr/Comment.nvim',
-	  lazy = false,
-	  config = function()
-		require('Comment').setup()
-	  end,
-	},
-	{
-	  "mbbill/undotree",
-	  lazy = true, -- Charge uniquement lorsqu'il est nécessaire
-	  cmd = { "UndotreeToggle", "UndotreeShow" }, -- Commandes déclencheuses
-	},
+  {
+    "kylechui/nvim-surround",
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+      })
+    end,
+  },
+  {
+    'numToStr/Comment.nvim',
+    lazy = false,
+    config = function()
+      require('Comment').setup()
+    end,
+  },
+  {
+    "mbbill/undotree",
+    lazy = true,                                -- Charge uniquement lorsqu'il est nécessaire
+    cmd = { "UndotreeToggle", "UndotreeShow" }, -- Commandes déclencheuses
+  },
 
-	{
-		"nvim-neorg/neorg",
-		lazy = false,
-		version = "v7.0.0", -- Version stable sans luarocks
-		dependencies = { "nvim-lua/plenary.nvim" },
-		config = function()
-			require("neorg").setup {
-				load = {
-					["core.defaults"] = {}, -- Charge les fonctionnalités de base
-					["core.concealer"] = {}, -- Affichage amélioré
-					["core.dirman"] = { -- Gestion des fichiers Neorg
-						config = {
-							workspaces = {
-								notes = "~/neorg/neorg_notes", -- Change le chemin si besoin
-								journal = "~/neorg/neorg_journal",
-							},
-							default_workspace = "notes",
-						},
-					},
-				},
-			}
-		end,
-	},
+  {
+    "nvim-neorg/neorg",
+    lazy = false,
+    version = "v7.0.0", -- Version stable sans luarocks
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("neorg").setup {
+        load = {
+          ["core.defaults"] = {},  -- Charge les fonctionnalités de base
+          ["core.concealer"] = {}, -- Affichage amélioré
+          ["core.dirman"] = {      -- Gestion des fichiers Neorg
+            config = {
+              workspaces = {
+                notes = "~/neorg/neorg_notes", -- Change le chemin si besoin
+                journal = "~/neorg/neorg_journal",
+              },
+              default_workspace = "notes",
+            },
+          },
+        },
+      }
+    end,
+  },
   {
     "folke/flash.nvim",
     event = "VeryLazy",
     opts = {},
     keys = {
       -- Remplace les commandes par défaut de NVIM
-		{ "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash Jump" },
-		{ "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-		{ "gr", mode = "n", function() require("flash").remote() end, desc = "Remote Flash" },  -- utilise "gr" au lieu de "r"
-		{ "gR", mode = "n", function() require("flash").treesitter_search() end, desc = "Treesitter Search" }, -- utilise "gR" au lieu de "R"
-		{ "<leader>s", mode = { "n", "x" }, function() require("flash").toggle() end, desc = "Toggle Flash" }, -- utilise <leader>s pour le mode toggle
+      { "s",         mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash Jump" },
+      { "S",         mode = { "n", "o", "x" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
+      { "gr",        mode = "n",               function() require("flash").remote() end,            desc = "Remote Flash" },      -- utilise "gr" au lieu de "r"
+      { "gR",        mode = "n",               function() require("flash").treesitter_search() end, desc = "Treesitter Search" }, -- utilise "gR" au lieu de "R"
+      { "<leader>s", mode = { "n", "x" },      function() require("flash").toggle() end,            desc = "Toggle Flash" },      -- utilise <leader>s pour le mode toggle
     },
   },
-	{
-		'junegunn/vim-easy-align',
-		event = "VeryLazy",
-		-- Optional: You can add 'lazy = true' if you want to explicitly lazy-load it,
-		-- though lazy.nvim often handles this automatically based on usage.
-		-- lazy = true,
-	},
+  {
+    'junegunn/vim-easy-align',
+    event = "VeryLazy",
+    -- Optional: You can add 'lazy = true' if you want to explicitly lazy-load it,
+    -- though lazy.nvim often handles this automatically based on usage.
+    -- lazy = true,
+  },
   {
     'stevearc/quicker.nvim',
     event = "FileType qf",
@@ -582,9 +583,33 @@ return {
       },
       -- Mappages de touches à l'intérieur de la quickfix
       keys = {
-        { ">", function() require("quicker").expand() end, desc = "Expand context" },
+        { ">", function() require("quicker").expand() end,   desc = "Expand context" },
         { "<", function() require("quicker").collapse() end, desc = "Collapse context" },
       },
+    },
+  },
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    -- Déclencheurs de chargement (Triggers)
+    ft = { 'markdown', 'quarto' },
+    cmd = { 'RenderMarkdown' },
+
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+      'nvim-tree/nvim-web-devicons' -- Assurez-vous d'avoir des icônes fonctionnelles
+    },
+
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
+    opts = {
+      -- Vos options personnalisées iront ici plus tard
+    },
+  },
+  {
+    "allaman/emoji.nvim",
+    version = "*",
+    opts = {
+      enable_cmp_integration = true,
     },
   }
 }
