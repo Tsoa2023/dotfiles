@@ -1,0 +1,768 @@
+# ===== LISTE NETTOYÉE (doublons supprimés) =====
+
+find . -type f -name "*.c"
+find . -type f -name "*.h"
+find . -type f -mtime -7
+find . -type f -size +100M
+find . -empty
+find . -type f -exec chmod 644 {} \;
+find . -type d -exec chmod 755 {} \;
+find . -type f -print0 | xargs -0 rm
+find . -type f
+find . -type d
+find . -name "*.c"
+find . -size +100M
+find . -mtime -7
+find . -perm -4000
+find / -xdev -type f 2>/dev/null
+find . -type f | wc -l
+find . -type d | wc -l
+grep -rn "TODO" .
+grep -rn "FIXME" .
+grep -r --include="*.py" "async"
+grep -r --include="*.c" "main"
+grep -v "^#"
+grep -E "foo|bar"
+grep -R "TODO" .
+grep -R "main(" .
+grep -R --include="*.c" "malloc" .
+grep -R --exclude-dir=.git "FIXME" .
+sed '/^$/d'
+sed '/^#/d'
+sed 's/foo/bar/'
+sed 's/foo/bar/g'
+sed '5s/foo/bar/'
+sed -n '10,20p'
+sed 's/^[[:space:]]*//'
+sed 's/[[:space:]]*$//'
+sed -E 's/[0-9]+/NUMBER/g'
+sed -n '1,20p' file.txt
+sed 's/foo/bar/g' file.txt
+awk '{print $1}'
+awk '{print $2}'
+awk '{print $1,$3}'
+awk '{sum+=$1} END {print sum}'
+awk 'END {print NR}'
+awk '$3 > 100'
+awk -F: '{print $1}' /etc/passwd
+awk '{print NF}' file.txt
+awk '{sum+=$1} END {print sum}' file.txt
+sort
+sort -u
+sort -n
+sort -h
+sort -k2
+sort file.txt
+sort -u file.txt
+uniq
+uniq -c
+uniq -c file.txt
+cut -d: -f1 /etc/passwd
+cut -d, -f2 data.csv
+paste file1 file2
+tr 'a-z' 'A-Z'
+tr -d '\r'
+tr -s ' '
+xargs rm
+xargs -I{} mv {} images/
+xargs wc -l
+xargs -n1 echo
+tar -czvf archive.tar.gz folder/
+tar -xzvf archive.tar.gz
+tar -tvf archive.tar.gz
+tar -tvf archive.tar
+tar -xvf archive.tar
+tar -czvf archive.tar.gz dir
+gzip file.txt
+gunzip file.txt.gz
+zip -r archive.zip folder/
+unzip archive.zip
+zip -r archive.zip dir
+unzip -l archive.zip
+rsync -avh source/ destination/
+rsync -av --delete src/ dest/
+rsync -av --progress src/ dest/
+rsync -avh src/ dst/
+rsync --delete -avh src/ dst/
+scp file.txt user@server:/tmp/
+scp -r folder user@server:/tmp/
+scp file user@host:/tmp/
+ssh user@server
+ssh -L 8080:localhost:80 user@server
+ssh user@host
+curl -I https://example.com
+curl -LO https://example.com/file.tar.gz
+curl -X POST -H "Content-Type: application/json" -d '{"name":"John"}' https://example.com
+curl ifconfig.me
+curl https://ipinfo.io
+wget https://example.com/file.iso
+wget -c https://example.com/file.iso
+wget --spider https://example.com
+jq '.'
+jq '.name'
+jq '.[].name'
+jq '.users[] | select(.age>18)'
+jq .
+jq keys file.json
+jq '.[]' file.json
+yq .
+git log --oneline --graph --decorate --all
+git log -S "function_name"
+git blame file.c
+git diff HEAD~3 file.c
+git clean -fd
+git reset --hard HEAD
+git reflog
+git stash
+git stash pop
+git cherry-pick <commit>
+git status
+git diff
+git diff --staged
+git branch -a
+git remote -v
+git stash list
+git blame README.md
+git shortlog -sn
+git show HEAD
+git ls-files
+git clean -nd
+git bisect log
+git grep TODO
+docker ps
+docker ps -a
+docker images
+docker exec -it container bash
+docker logs -f container
+docker system prune -a
+docker image prune
+docker volume prune
+docker network ls
+docker compose up -d
+docker compose down
+docker volume ls
+docker stats
+docker logs CONTAINER
+docker exec -it CONTAINER sh
+docker inspect CONTAINER
+docker system df
+docker system prune
+kubectl get pods -A
+kubectl get nodes
+kubectl get svc -A
+kubectl describe pod POD
+kubectl logs POD
+kubectl exec -it POD -- sh
+kubectl top pods
+kubectl config get-contexts
+kubectl cluster-info
+helm list -A
+helm history RELEASE
+ss -tulpn
+netstat -tulpn
+ss -tulnp
+ss -s
+netstat -tulnp
+lsof -i :8080
+lsof -p 1234
+lsof -i
+lsof -p PID
+lsof +D .
+ps aux
+ps aux --sort=-%cpu | head
+ps aux --sort=-%mem | head
+ps -ef
+pstree
+pstree -p
+pgrep firefox
+pkill firefox
+kill -9 12345
+df -h
+df -i
+du -sh *
+du -ah . | sort -rh | head -20
+du -ah . | sort -hr | head -20
+du -xh / | sort -hr | head -20
+ncdu .
+free -h
+vmstat
+vmstat 1 5
+iostat
+mpstat
+mount
+umount /dev/sdb1
+lsblk
+blkid
+findmnt
+lscpu
+lspci
+lsusb
+lsmem
+lsmod
+modinfo kvm
+journalctl -xe
+journalctl -u nginx -f
+journalctl -p err -b
+journalctl -b
+journalctl -f
+systemctl status nginx
+systemctl restart nginx
+systemctl enable nginx
+systemctl disable nginx
+systemctl list-units --type=service
+systemctl list-units
+systemctl list-unit-files
+systemctl --failed
+systemctl status ssh
+service --status-all
+ip addr
+ip route
+ip link
+ip a
+ip r
+ip neigh
+arp -a
+ping google.com
+ping -c 4 8.8.8.8
+traceroute google.com
+traceroute 8.8.8.8
+tracepath 8.8.8.8
+dig google.com
+host google.com
+nslookup google.com
+openssl s_client -connect google.com:443
+tcpdump -i any
+nmap -sV 192.168.1.1
+nmap -A 192.168.1.1
+nmap -p 1-65535 localhost
+nmap localhost
+nmap -sV localhost
+nc -lvnp 4444
+nc localhost 8080
+python3 -m http.server 8000
+python3 -m http.server
+python3 -m venv venv
+history | tail -50
+history
+env | sort
+printenv PATH
+env
+printenv
+set
+alias
+which python3
+whereis gcc
+which gcc
+type gcc
+command -v gcc
+file executable
+file *
+stat *
+strings binary
+strings a.out
+objdump -d binary
+objdump -d a.out
+objdump -x a.out
+readelf -h binary
+readelf -h a.out
+readelf -S a.out
+readelf -s a.out
+nm binary
+nm a.out
+ldd binary
+ldd a.out
+hexdump -C file.bin | head
+xxd file.bin | head
+od -Ax -tx1 file.bin | head
+sha256sum file.iso
+sha256sum *
+md5sum file.iso
+md5sum *
+base64 file.txt
+base64 -d file.b64
+openssl rand -base64 32
+openssl dgst -sha256 file.txt
+openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365
+realpath .
+basename "$PWD"
+dirname "$PWD"
+readlink -f file
+fd main
+fd "\\.cpp$"
+fd . src
+fd "\.c$"
+fd "\.h$"
+fd "\.md$"
+fd --hidden
+fd --type d
+fd --type f
+rg "TODO"
+rg "main"
+rg --hidden "password"
+rg "malloc"
+rg "printf"
+fzf
+fzf --preview 'bat --style=numbers --color=always {}'
+tree
+tree -L 2
+tree -a
+tmux ls
+tmux new -s project
+tmux attach -t project
+tmux kill-session -t project
+chmod 755 script.sh
+chmod +x script.sh
+chmod -R 755 dir
+chown user:user file.txt
+chown -R user:user dir
+getfacl file
+setfacl -m u:user:rwx file
+ln -s source target
+ln -s target link
+fuser -v /dev/sda
+uptime
+uname -a
+hostnamectl
+dmesg | tail -100
+top
+htop
+btop
+watch -n1 "df -h"
+watch -n1 "free -h"
+watch -n1 "ss -tulnp"
+watch git status
+make -n
+make clean
+make test
+cmake -S . -B build
+cmake --build build
+ctest --test-dir build
+gdb ./a.out
+gdb -q ./a.out
+strace ./a.out
+ltrace ./a.out
+perf stat ./a.out
+perf top
+valgrind ./a.out
+valgrind --leak-check=full ./a.out
+time ./a.out
+hyperfine "./a.out"
+pip list
+pip freeze
+pipdeptree
+cargo build
+cargo test
+cargo clippy
+cargo fmt
+go test ./...
+go fmt ./...
+go vet ./...
+npm list
+npm outdated
+npm audit
+pnpm list
+yarn why react
+sqlite3 database.db ".tables"
+sqlite3 database.db ".schema"
+sqlite3 database.db "SELECT * FROM sqlite_master;"
+column -t file.txt
+comm file1 file2
+join file1 file2
+split -l 1000 file.txt
+parallel echo ::: 1 2 3
+diff -ru dir1 dir2
+cmp file1 file2
+comm -3 <(sort file1) <(sort file2)
+
+
+# ===== COMMANDES ESSENTIELLES / PUISSANTES AJOUTÉES (absentes de la liste initiale) =====
+
+## Fichiers de base
+cp -r source/ dest/
+mv old_name new_name
+rm -rf dir/
+touch file.txt
+mkdir -p a/b/c
+rmdir empty_dir
+cat file.txt
+tac file.txt
+less file.txt
+tail -f log.txt
+head -n 20 file.txt
+wc -l file.txt
+tee output.txt
+
+## Édition / traitement en flux
+patch < changes.diff
+
+## Compression additionnelle
+7z x archive.7z
+unrar x archive.rar
+
+## Réseau / sécurité avancée
+socat TCP-LISTEN:8080,fork TCP:localhost:80
+ssh-keygen -t ed25519
+ssh-copy-id user@server
+gpg --encrypt --recipient user@example.com file.txt
+gpg -d file.txt.gpg
+iptables -L -n -v
+ufw status
+ufw allow 22/tcp
+fail2ban-client status
+
+## Système / disques bas niveau
+dd if=/dev/zero of=file.img bs=1M count=100
+mkfs.ext4 /dev/sdb1
+fsck /dev/sdb1
+fdisk -l
+parted /dev/sdb print
+chattr +i file.txt
+lsattr file.txt
+
+## Processus & planification
+crontab -e
+crontab -l
+nohup ./script.sh &
+disown -a
+jobs
+fg %1
+bg %1
+timeout 10 ./a.out
+nice -n 10 ./a.out
+renice -n 5 -p 1234
+ulimit -a
+sudo -l
+su - user
+passwd user
+useradd -m newuser
+visudo
+
+## Info utilisateur / session
+id
+whoami
+groups
+last
+who
+w
+
+## Divers utilitaires puissants
+date "+%Y-%m-%d %H:%M:%S"
+timedatectl
+shutdown -h now
+reboot
+seq 1 10
+bc <<< "2+2"
+
+
+# ===== AJOUTS DEPUIS "all-commands.md" (TCM Academy - Linux 101) =====
+
+## Bases (manquaient totalement)
+whoami
+hostname
+pwd
+more file.txt
+man command
+info command
+command --help
+man hier
+
+## Aide / options ls
+ls -al
+ls --all -l
+ls -I "file*"
+ls --ignore="file*"
+
+## Expansion de fichiers (globbing)
+ls file*.txt
+ls file?.txt
+ls file[1-3].txt
+ls file[a-zA-Z].txt
+shopt -s globstar
+ls **/*.txt
+
+## cat avancé
+cat -b file1.txt file2.txt
+cat -n file1.txt file2.txt
+cat > new-file.txt
+
+## Liens
+ln file1.txt file2.txt
+
+## Recherche de fichiers
+locate file.txt
+locate -i file.txt
+find . -iname 'file*.txt'
+
+## Utilisateurs / groupes
+users
+chgrp group file.txt
+sudo -u otheruser command
+
+## Gestion de paquets (Debian/Ubuntu - APT)
+apt update
+apt upgrade
+apt list --upgradable
+apt search package
+apt show package
+apt install package
+apt remove package
+apt purge package
+apt autoremove
+
+## Gestion de paquets (RedHat/CentOS - YUM/DNF)
+yum check-update
+yum update
+yum search package
+yum info package
+yum install package
+yum remove package
+
+## Compilation depuis les sources
+./configure
+make
+sudo make install
+
+## Variables d'environnement
+export VAR=value
+unset VAR
+echo $VAR
+
+## Fichiers de démarrage du shell
+source ~/.zshrc
+
+## Redirections (E/S)
+commande > fichier.txt
+commande >> fichier.txt
+commande < fichier.txt
+commande 2> erreurs.txt
+commande 2> /dev/null
+commande &> tout.txt
+commande > sortie.txt 2>&1
+
+## Pipes avancés
+commande1 | commande2
+commande1 |& commande2
+
+## Historique de commandes (expansion)
+!!
+!-1
+!42
+!grep
+^ancien^nouveau^
+
+## Substitution de commandes
+commande $(autre_commande)
+commande `autre_commande`
+
+## grep avec contexte
+grep motif -A 3 fichier.txt
+grep motif -B 3 fichier.txt
+grep motif -A 1 -B 3 fichier.txt
+
+## wc simple
+wc fichier.txt
+
+## sed avancé
+sed '$s/old/new/g' fichier.txt
+sed '/pattern/d' fichier.txt
+sed '/pattern/ s/old/new/g' fichier.txt
+
+## awk avancé
+awk -F ',' '/motif/ {print $1}' fichier.txt
+awk -F ',' '/motif/ {print NR,$1}' fichier.txt
+
+## Réseau (legacy et avancé)
+ifconfig
+ip -s link
+ip route add 10.0.3.0/24 via 10.0.2.1
+ip route delete 10.0.3.0/24 via 10.0.2.1
+route
+dig -x 8.8.8.8
+netstat -at
+netstat -lt
+
+## Conversion de fins de ligne
+unix2dos fichier.txt
+dos2unix fichier.txt
+
+## Gestion des signaux
+kill -l
+
+## Cron
+crontab -r
+
+## Scripting bash
+bash script.sh
+
+
+# ===== COMMANDES MANQUANTES AJOUTÉES =====
+
+## Éditeurs de texte (absents de la liste initiale)
+vim file.txt
+nano file.txt
+vi file.txt
+emacs file.txt
+
+## Git - commandes de base (la liste n'avait que des commandes avancées)
+git init
+git clone <url>
+git add .
+git add file.txt
+git commit -m "message"
+git commit -am "message"
+git push
+git push origin branch
+git push -u origin branch
+git pull
+git fetch
+git checkout branch
+git checkout -b new-branch
+git branch new-branch
+git branch -d branch
+git branch -D branch
+git merge branch
+git rebase branch
+git rebase -i HEAD~3
+git tag
+git tag -a v1.0 -m "message"
+git rm file.txt
+git mv old.txt new.txt
+git config --global user.name "name"
+git config --global user.email "email"
+git remote add origin <url>
+git fetch --all
+git pull --rebase
+git log -p
+git log --author="name"
+
+## Docker - commandes de base (idem, seules les commandes avancées étaient présentes)
+docker run -d -p 8080:80 image
+docker run -it image bash
+docker build -t name .
+docker pull image
+docker push image
+docker rm CONTAINER
+docker rmi IMAGE
+docker cp file CONTAINER:/path
+docker network create name
+docker start CONTAINER
+docker stop CONTAINER
+docker restart CONTAINER
+docker rename OLD NEW
+docker commit CONTAINER image
+docker save -o file.tar image
+docker load -i file.tar
+docker-compose logs -f
+docker compose ps
+docker compose build
+
+## Kubernetes (manquaient les commandes d'écriture/déploiement)
+kubectl apply -f file.yaml
+kubectl create -f file.yaml
+kubectl delete -f file.yaml
+kubectl delete pod POD
+kubectl scale deployment NAME --replicas=3
+kubectl rollout status deployment NAME
+kubectl rollout undo deployment NAME
+kubectl get deployments
+kubectl get all
+kubectl port-forward POD 8080:80
+kubectl cp file POD:/path
+kubectl edit deployment NAME
+kubectl label pod POD key=value
+
+## Gestion de paquets additionnelle (autres distributions)
+dnf install package
+dnf update
+dnf remove package
+pacman -S package
+pacman -Syu
+pacman -R package
+zypper install package
+zypper update
+snap install package
+snap list
+flatpak install package
+flatpak list
+
+## Traitement de texte additionnel
+rev file.txt
+nl file.txt
+fold -w 80 file.txt
+fmt file.txt
+expand file.txt
+unexpand file.txt
+shuf file.txt
+tr -c 'a-zA-Z' ' '
+csplit file.txt '/pattern/'
+
+## Planification / gestion de processus additionnelle
+at now + 1 hour
+atq
+atrm 1
+screen -S session
+screen -r session
+screen -ls
+sleep 5
+yes | command
+setsid command &
+
+## Réseau additionnel
+curl -v https://example.com
+curl -o file.txt https://example.com
+curl -s -o /dev/null -w "%{http_code}" https://example.com
+ping6 google.com
+whois example.com
+mtr google.com
+arping 192.168.1.1
+ip -s link
+ethtool eth0
+nmcli device status
+nmcli connection show
+
+## Sécurité / permissions additionnelles
+getenforce
+setenforce 0
+sestatus
+umask
+umask 022
+sudo !!
+visudo -c
+
+## Système additionnel
+hostnamectl set-hostname newname
+timedatectl set-timezone Europe/Paris
+localectl
+swapon -s
+swapoff -a
+free -m
+lsipc
+sysctl -a
+sysctl vm.swappiness
+
+## Divers / shell
+echo $?
+export -p
+unalias name
+type -a command
+clear
+exit
+logout
+read -p "Prompt: " var
+select opt in a b c; do echo $opt; done
+trap 'echo bye' EXIT
+echo "!!" >> /home/fharifen/.config/cheats/terminal.txt # Add last cmd to terminal.txt
+nvim /home/fharifen/.config/cheats/terminal.txt # Open terminal.txt 
+distrobox create --image archlinux --name box_name
+
+
+cat /etc/os-release
+lsb_release -a
+distrobox enter openwhispr-box
+systemctl --user start syncthing
+fzf --style full --preview 'fzf-preview.sh {}' --bind 'focus:transform-header:file --brief {}'
+find . -type f | grep -E -i appimage | xargs -I {} cp {} ~/appimage/
+
+set -o vi # Terminal mode vim
+lspci | grep -E 'VGA|3D' # List interface graphique
+glxinfo | grep -i device # Processeur graphique Ubuntu actuel 
