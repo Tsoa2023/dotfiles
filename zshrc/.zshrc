@@ -107,11 +107,12 @@ start_tmux
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='nvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR="/home/fharifen/appimage/nvim.appimage"
+  export VISUAL="/home/fharifen/appimage/nvim.appimage"
+fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch $(uname -m)"
@@ -150,6 +151,10 @@ alias mech='Mechvibes.appimage'
 alias obsidian='Obsidian.AppImage'
 alias jan='Jan_0.8.3_amd64.AppImage'
 alias whispr='/home/fharifen/appimage/OpenWhispr.AppImage'
+alias fzf="fzf --style full --preview 'fzf-preview.sh {}' --bind 'focus:transform-header:file --brief {}'"
+alias nvimf='nvim $(fzf)'
+alias lss='ls -lia --group-directories-first --color=auto'
+alias zshrc='nvim ~/.zshrc'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -195,5 +200,57 @@ function zvm_after_lazy_keybindings() {
 }
 
 
-# Added by Antigravity CLI installer
-export PATH="/home/fharifen/.local/bin:$PATH"
+# ==============================================================================
+# CONFIGURATION DU PATH
+# ==============================================================================
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$PATH:$HOME/.fzf/bin"
+export PATH="$PATH:$HOME/appimage"
+export PATH="$PATH:$HOME/development/flutter/bin"
+export PATH="$PATH:$HOME/Android/Sdk/cmdline-tools/latest/bin"
+export PATH="$PATH:$HOME/Android/Sdk/platform-tools"
+export PATH="$PATH:$JAVA_HOME/bin"
+export PATH="$PATH:$HOME/.local/share/nvim/mason/bin"
+export PATH="$PATH:$HOME/.gem/ruby/$(ruby -e 'print RUBY_VERSION' 2>/dev/null || echo "3.0.2")/bin"
+
+# Nettoyage automatique des doublons par Zsh
+typeset -U PATH path
+
+
+
+# # # Added by Antigravity CLI installer
+# export PATH="/home/fharifen/.local/bin:$PATH"
+# export PATH=/home/fharifen/.local/bin:/home/fharifen/.gem/ruby/3.0.2/bin:/home/fharifen/.local/bin:/home/fharifen/.local/share/nvim/mason/bin:/home/fharifen/.local/bin:/home/fharifen/.gem/ruby/3.0.2/bin:/home/fharifen/.local/bin:/home/fharifen/.local/bin:/home/fharifen/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/fharifen/.local/bin:/home/fharifen/appimage/:/home/fharifen/development/flutter/bin:/home/fharifen/Android/Sdk/cmdline-tools/latest/bin:/home/fharifen/Android/Sdk/platform-tools:/usr/lib/jvm/java-17-openjdk-amd64/bin:/home/fharifen/.fzf/bin:/home/fharifen/appimage/:/home/fharifen/development/flutter/bin:/home/fharifen/Android/Sdk/cmdline-tools/latest/bin:/home/fharifen/Android/Sdk/platform-tools:/usr/lib/jvm/java-17-openjdk-amd64/bin:/home/fharifen/.local/bin
+# export PATH=/home/fharifen/.local/bin:/home/fharifen/.gem/ruby/3.0.2/bin:/home/fharifen/.local/bin:/home/fharifen/.local/share/nvim/mason/bin:/home/fharifen/.local/bin:/home/fharifen/.gem/ruby/3.0.2/bin:/home/fharifen/.local/bin:/home/fharifen/.local/bin:/home/fharifen/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/fharifen/.local/bin:/home/fharifen/appimage/:/home/fharifen/development/flutter/bin:/home/fharifen/Android/Sdk/cmdline-tools/latest/bin:/home/fharifen/Android/Sdk/platform-tools:/usr/lib/jvm/java-17-openjdk-amd64/bin:/home/fharifen/.fzf/bin:/home/fharifen/appimage/:/home/fharifen/development/flutter/bin:/home/fharifen/Android/Sdk/cmdline-tools/latest/bin:/home/fharifen/Android/Sdk/platform-tools:/usr/lib/jvm/java-17-openjdk-amd64/bin:/home/fharifen/.local/bin:/home/fharifen/.local/bin
+#
+# # Suppression automatique des doublons dans le PATH par Zsh
+# typeset -U PATH path
+
+function cdd {
+    local IFS=$'
+'
+    local tempfile="$(mktemp -t tmp.XXXXXX)"
+    local ranger_cmd=(
+        command
+        ranger
+        --cmd="map q chain shell echo %d > \"$tempfile\"; quitall"
+    )
+
+    ${ranger_cmd[@]} "$@"
+    if [[ -f "$tempfile" ]] && [[ "$(cat -- "$tempfile")" != "$(echo -n $(pwd))" ]]; then
+        cd -- "$(cat "$tempfile")" || return
+    fi
+    command rm -f -- "$tempfile" 2>/dev/null
+}
+
+fzfo() {
+  local file
+  file=$(fzf)
+  [ -z "$file" ] && return
+
+  if file --mime-type "$file" | grep -q "text/"; then
+    nvim "$file" 
+  else
+    xdg-open "$file" 2>/dev/null &
+  fi
+}
