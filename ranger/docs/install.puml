@@ -1,0 +1,85 @@
+@startuml ranger-config-installation-script
+skinparam backgroundColor #2E2E2E
+skinparam shadowing false
+skinparam defaultFontColor #F0F0F0
+skinparam activityBackgroundColor #3A3A3A
+skinparam activityBorderColor #555555
+skinparam arrowColor #CCCCCC
+skinparam swimlaneBackgroundColor #444444
+
+title <color:#F0F0F0>ranger-config-installation-script</color>
+
+start
+
+    :Ask if the user wants to install oh-my-posh;
+    :Read user input;
+
+    if (Response is 'yes' or 'y'?) then (yes)
+        if (install-posh.sh exists and is executable?) then (yes)
+            :Run ./scripts/install-posh.sh;
+        else (no)
+            :<color:#FFD700>Notify "install-posh.sh not found or not executable"</color>;
+        endif
+    else (no)
+        :<color:#00FF00>Notify "Skipping oh-my-posh installation"</color>;
+    endif
+
+    :Determine the OS (uname);
+    switch (OS type)
+        case (macOS)
+            :Set update and install commands using Homebrew;
+        case (Linux)
+            if (Fedora detected?) then (yes)
+                :Set update and install commands using DNF;
+            else if (Ubuntu detected?) then (yes)
+                :Set update and install commands using APT;
+            else (Unsupported Linux)
+                :<color:#FFD700>Notify "Unsupported Linux distribution"</color>;
+                stop
+            endif
+        case (Other OS)
+            :<color:#FFD700>Notify "Unsupported OS"</color>;
+            stop
+    endswitch
+
+    :Grant execution permission to scripts/helper.sh;
+    :Source scripts/helper.sh;
+    :Run package installation (ranger, fzf, atool, etc.);
+
+    if (OS is Linux?) then (yes)
+        :Replace ranger commands with Linux-specific ones;
+    endif
+
+    :Check if Visual Studio Code (code) or Codium is installed;
+    if (Neither code nor Codium is installed?) then (yes)
+        :Update package list and install dependencies;
+        if (OS is macOS?) then (yes)
+            :Install VSCodium using Homebrew;
+        else if (Fedora detected?) then (yes)
+            :Add VSCodium repository and install with DNF;
+        else (Ubuntu or Debian-based)
+            :Add VSCodium repository and install with APT;
+        endif
+    else (no)
+        :<color:#00FF00>Notify "At least one of Visual Studio Code or Codium is already installed"</color>;
+    endif
+
+    :Check if .zshrc exists;
+    if (.zshrc exists?) then (yes)
+        :<color:#00FF00>Notify ".zshrc already exists"</color>;
+    else (no)
+        :Create .zshrc file;
+    endif
+
+    :Ensure ~/.local/bin is added to PATH;
+
+    if (Codium is installed and code is not?) then (yes)
+        :Check and add alias 'code=codium' to .zshrc;
+    endif
+
+    :Ensure cdd function for ranger launch is present in .zshrc;
+    :Ensure ls and zshrc aliases are present in .zshrc;
+    :Reload zsh;
+stop
+
+@enduml
