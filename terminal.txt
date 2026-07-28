@@ -175,8 +175,6 @@ ps -ef
 pstree
 pstree -p
 pgrep firefox
-pkill firefox
-kill -9 12345
 df -h
 df -i
 du -sh *
@@ -766,3 +764,9 @@ find . -type f | grep -E -i appimage | xargs -I {} cp {} ~/appimage/
 set -o vi # Terminal mode vim
 lspci | grep -E 'VGA|3D' # List interface graphique
 glxinfo | grep -i device # Processeur graphique Ubuntu actuel 
+nvim $(fzf)
+rm -i $(fzf -m)
+git checkout $(git branch -a | fzf | tr -d ' ')
+git log --oneline | fzf --preview 'git show {1}' # Preview commits diff
+kill $(pgrep -l -u $USER | fzf | awk '{print $1}')
+
