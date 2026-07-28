@@ -217,15 +217,6 @@ export PATH="$PATH:$HOME/.gem/ruby/$(ruby -e 'print RUBY_VERSION' 2>/dev/null ||
 typeset -U PATH path
 
 
-
-# # # Added by Antigravity CLI installer
-# export PATH="/home/fharifen/.local/bin:$PATH"
-# export PATH=/home/fharifen/.local/bin:/home/fharifen/.gem/ruby/3.0.2/bin:/home/fharifen/.local/bin:/home/fharifen/.local/share/nvim/mason/bin:/home/fharifen/.local/bin:/home/fharifen/.gem/ruby/3.0.2/bin:/home/fharifen/.local/bin:/home/fharifen/.local/bin:/home/fharifen/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/fharifen/.local/bin:/home/fharifen/appimage/:/home/fharifen/development/flutter/bin:/home/fharifen/Android/Sdk/cmdline-tools/latest/bin:/home/fharifen/Android/Sdk/platform-tools:/usr/lib/jvm/java-17-openjdk-amd64/bin:/home/fharifen/.fzf/bin:/home/fharifen/appimage/:/home/fharifen/development/flutter/bin:/home/fharifen/Android/Sdk/cmdline-tools/latest/bin:/home/fharifen/Android/Sdk/platform-tools:/usr/lib/jvm/java-17-openjdk-amd64/bin:/home/fharifen/.local/bin
-# export PATH=/home/fharifen/.local/bin:/home/fharifen/.gem/ruby/3.0.2/bin:/home/fharifen/.local/bin:/home/fharifen/.local/share/nvim/mason/bin:/home/fharifen/.local/bin:/home/fharifen/.gem/ruby/3.0.2/bin:/home/fharifen/.local/bin:/home/fharifen/.local/bin:/home/fharifen/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/fharifen/.local/bin:/home/fharifen/appimage/:/home/fharifen/development/flutter/bin:/home/fharifen/Android/Sdk/cmdline-tools/latest/bin:/home/fharifen/Android/Sdk/platform-tools:/usr/lib/jvm/java-17-openjdk-amd64/bin:/home/fharifen/.fzf/bin:/home/fharifen/appimage/:/home/fharifen/development/flutter/bin:/home/fharifen/Android/Sdk/cmdline-tools/latest/bin:/home/fharifen/Android/Sdk/platform-tools:/usr/lib/jvm/java-17-openjdk-amd64/bin:/home/fharifen/.local/bin:/home/fharifen/.local/bin
-#
-# # Suppression automatique des doublons dans le PATH par Zsh
-# typeset -U PATH path
-
 function cdd {
     local IFS=$'
 '
